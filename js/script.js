@@ -1,7 +1,19 @@
 const port = {
     target: document.querySelector('main#main'),
     jsonURLMain:'https://casims.ca/csport/wp-json/wp/v2/csp-project?_embed',
+    jsonURLProject: null,
     contentHTML: '',
+    checkURL: function() {
+        let capturedURL = window.location.href;
+        if (capturedURL.includes('#')) {
+            let hashPosition = capturedURL.indexOf('#')+1;
+            let capturedID = capturedURL.substring(hashPosition);
+            this.jsonURLProject = `https://casims.ca/csport/wp-json/wp/v2/csp-project/${capturedID}?_embed`;
+            this.outputContentProject();
+        } else {
+            this.outputContentMain();
+        };  
+    },
     // getJSON: function(url) {
     //     fetch(url)
     //         .then(response => response.json())
@@ -14,6 +26,7 @@ const port = {
         const response = await fetch(url);
         return port.jsonData = await response.json();
     },
+
     outputContentMain: async function() {
         await this.getJSON(this.jsonURLMain);
         console.log(port.jsonData);
@@ -27,7 +40,7 @@ const port = {
             </section>
             <section id="projects-section">
                 <h2>Projects</h2>`;
-        this.outputContentProjects();
+        this.outputContentMainProjects();
         this.contentHTML += `
             </section>
             <section id="contact-section">
@@ -39,11 +52,11 @@ const port = {
             </section>`;
         this.target.innerHTML = this.contentHTML;
     },
-    outputContentProjects: function() {
+    outputContentMainProjects: function() {
         for (let project of port.jsonData) {
             this.contentHTML += `
                 <article class="project-card">
-                    <img src="${project['_embedded']['wp:featuredmedia'][0].media_details.sizes.medium.source_url}" alt="${project['_embedded']['wp:featuredmedia'][0].alt_text}">
+                    <img src="${project['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${project['_embedded']['wp:featuredmedia'][0].alt_text}">
                     <h3>${project.title.rendered}</h3>
                     <h4>${project.acf.proj_sub_title}</h4>
                     <ul>`;
@@ -59,5 +72,44 @@ const port = {
                 </article>
             `;
         }
-    }
+    },
+
+    outputContentProject: async function() {
+        this.target.innerHTML = '';
+        await this.getJSON(this.jsonURLProject);
+        console.log(port.jsonData);
+        if (port.jsonData.code) {
+            this.contentHTML = `
+                <h1>404 Error</h1>
+                <p>Page not found.</p>`;
+            this.target.innerHTML = this.contentHTML;
+        } else {
+            this.contentHTML = `
+                <h1>${port.jsonData.title.rendered}</h1>
+                <img src="${port.jsonData['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${port.jsonData['_embedded']['wp:featuredmedia'][0].alt_text}">
+                <h2>${port.jsonData.acf.proj_sub_title}</h2>
+                <ul>`;
+            let terms = port.jsonData['_embedded']['wp:term'][0];
+            for (let term of terms) {
+                this.contentHTML += `<li>${term.name}</li>`;
+            };
+            this.contentHTML += `
+                </ul>
+                <p>${port.jsonData.acf.proj_duration}</p>
+
+            `;
+        };
+    },
 };
+
+window.onload = function() {
+    port.checkURL();
+};
+
+window.onhashchange = function() {
+    port.checkURL();
+}
+
+// checkForURLChange: function() {
+//     window.addEventListener('locationchange', this.checkURL());
+// },
