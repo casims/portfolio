@@ -21,6 +21,9 @@ const port = {
             <section id="landing-section">
                 <h1 id="main-title">Connor Sims</h1>
                 <p>Entry-level Front-End Engineer with a passion for JavaScript and problem solving.</p>
+                <p id="email-copy">contact@casims.ca</p>
+                <a href="">LinkedIn</a>
+                <a href="">GitHub</a>
             </section>
             <section id="projects-section">
                 <h2>Projects</h2>`;
@@ -28,7 +31,11 @@ const port = {
         this.contentHTML += `
             </section>
             <section id="contact-section">
-
+                <h2>Contact</h2>
+                <p>Get in touch!</p>
+                <p id="email-copy">contact@casims.ca</p>
+                <a href="">LinkedIn</a>
+                <a href="">GitHub</a>
             </section>`;
         this.target.innerHTML = this.contentHTML;
     },
