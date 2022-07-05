@@ -7,7 +7,7 @@ const port = {
         <section id="contact-section">
             <h2>Contact</h2>
             <p>Get in touch!</p>
-            <p id="email-copy">contact@casims.ca</p>
+            <p id="email-copy">connor@casims.ca</p>
             <a href="">LinkedIn</a>
             <a href="">GitHub</a>
         </section>`,
@@ -15,35 +15,29 @@ const port = {
         let capturedURL = window.location.href;
         scroll(0,0);
         if (capturedURL.includes('#')) {
-            console.log('Hash function called')
             let hashPosition = capturedURL.indexOf('#')+1;
             let capturedID = capturedURL.substring(hashPosition);
             this.jsonURLProject = `https://casims.ca/csport/wp-json/wp/v2/csp-project/${capturedID}?_embed`;
             this.outputContentProject();
         } else {
-            console.log('Non-Hash function called')
             this.outputContentMain();
         };  
     },
-    // getJSON: function(url) {
-    //     fetch(url)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data);
-    //             port.jsonData = data;
-    //         })
-    // },
     getJSON: async function(url) {
         const response = await fetch(url);
         return port.jsonData = await response.json();
     },
 
     outputContentMain: async function() {
+        this.target.innerHTML = '';
         await this.getJSON(this.jsonURLMain);
         console.log(port.jsonData);
         this.contentHTML = `
             <section id="landing-section">
-                <h1 id="main-title">Connor Sims</h1>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 670 506">
+                    <path id="Imported Path" fill="none" stroke="black" stroke-width="52" d="M 208.00,28.00 C 108.59,28.00 28.00,108.59 28.00,208.00 28.00,307.41 108.59,388.00 208.00,388.00M 208.00,118.00 C 158.29,118.00 118.00,158.29 118.00,208.00 118.00,257.71 158.29,298.00 208.00,298.00M 507.00,208.00 C 581.56,208.00 642.00,268.44 642.00,343.00 642.00,417.56 581.56,478.00 507.00,478.00M 207.50,388.00 C 207.50,388.00 507.50,388.00 507.50,388.00M 28.00,478.00 C 28.00,478.00 507.50,478.00 507.50,478.00M 207.50,28.00 C 207.50,28.00 642.00,28.00 642.00,28.00M 207.50,118.00 C 207.50,118.00 642.00,118.00 642.00,118.00M 237.50,208.00 C 237.50,208.00 507.50,208.00 507.50,208.00M 207.50,298.00 C 207.50,298.00 507.50,298.00 507.50,298.00" />
+                </svg>
+                <h1 id="main-title"><span>Connor</span>Sims</h1>
                 <p>Entry-level Front-End Engineer with a passion for JavaScript and problem solving.</p>
                 <p id="email-copy">contact@casims.ca</p>
                 <a href="">LinkedIn</a>
@@ -133,9 +127,11 @@ const port = {
                 if (feature.proj_feat_gen_image) {
                     let imageID = feature.proj_feat_gen_image;
                     let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
+                    console.log(arrayOfImageObjs);
                     let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
+                    console.log(capturedImageObj);
                     this.contentHTML += `
-                        <img src="${capturedImageObj.media_details.sizes.medium_large.source_url}" alt="${capturedImageObj.alt_text}">`;
+                        <img src="${capturedImageObj.source_url}" alt="${capturedImageObj.alt_text}">`;
                 };
             };
             this.contentHTML += `
@@ -172,8 +168,4 @@ window.onload = function() {
 
 window.onhashchange = function() {
     port.checkURL();
-}
-
-// checkForURLChange: function() {
-//     window.addEventListener('locationchange', this.checkURL());
-// },
+};
