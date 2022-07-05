@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Montserrat&display=swap');
+
+:root {
+    --underBlue: #02131b;
+    --waterCyan: #24cbd3;
+    --tuskWhite: #cdcbcc;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Inconsolata', 'Courier New', Courier, monospace;
+    color: var(--waterCyan);
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h1 span {
+    text-transform: lowercase;
+}
+
+p {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    color: var(--tuskWhite);
+}
+
+body {
+    display: grid;
+    grid-template:
+                ". m ." auto
+                "f f f" 3rem / 1rem auto 1rem;
+    background-color: var(--underBlue);
+}
+
+main {
+    grid-area: m;
+}
+
+footer {
+    grid-area: f;
+}
+
+nav {
+    grid-area: m;
+}
+
+svg {
+    width: 80%;
+    display: block;
+    margin: 0 auto 3rem;
+}
+
+svg path {
+    stroke: var(--waterCyan);
+}
+
+svg::after {
+    height: 3px;
+    width: 12rem;
+    position: absolute;
+    background-color: var(--tuskWhite);
+    content: "";
+}
+
+#landing-section {
+    margin-top: 3rem;
+    text-align: center;
+}
