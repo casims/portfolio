@@ -4,6 +4,7 @@
     --underBlue: #02131b;
     --waterCyan: #24cbd3;
     --tuskWhite: #cdcbcc;
+    --deeepGray: #121212; 
 }
 
 h1,
@@ -16,22 +17,53 @@ h4 {
 
 h1 {
     font-size: 2rem;
+    margin: 3rem 0;
+    position: relative;
 }
 
 h1 span {
     text-transform: lowercase;
 }
 
+h2 {
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+article {
+    background-color: var(--deeepGray);
+    box-shadow: 1px 1px 10px rgb(0 0 0 / 75%);
+    padding: 1rem;
+}
+
 p {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5rem;
     color: var(--tuskWhite);
+}
+
+a {
+    text-decoration: none;
+}
+
+#email-copy {
+    font-family: 'Inconsolata', 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    background-color: var(--waterCyan);
+    color: var(--underBlue);
+    font-size: 1.3rem;
+    padding: .5rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+    margin-bottom: 0rem;
 }
 
 body {
     display: grid;
     grid-template:
                 ". m ." auto
-                "f f f" 3rem / 1rem auto 1rem;
+                "f f f" 3rem / auto 18rem auto;
     background-color: var(--underBlue);
 }
 
@@ -47,20 +79,57 @@ nav {
     grid-area: m;
 }
 
-svg {
-    width: 80%;
-    display: block;
-    margin: 0 auto 3rem;
+section {
+    margin-bottom: 5rem;
+    position: relative;
 }
 
-svg path {
+section::after {
+    height: 3px;
+    position: absolute;
+    bottom: -2.4rem;
+    left: 5.5rem;
+    right: 5.5rem;
+    background-color: var(--tuskWhite);
+    content: "";
+}
+
+#logo {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+#logo path {
     stroke: var(--waterCyan);
 }
 
-svg::after {
+a svg {
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: .7rem 0.25rem;
+}
+
+a svg path {
+    fill: var(--waterCyan);
+}
+
+#main-title::before {
     height: 3px;
-    width: 12rem;
     position: absolute;
+    top: -1.3rem;
+    left: 3rem;
+    right: 3rem;
+    background-color: var(--tuskWhite);
+    content: "";
+}
+
+#main-title::after {
+    height: 3px;
+    position: absolute;
+    top: 3.6rem;
+    left: 2rem;
+    right: 2rem;
     background-color: var(--tuskWhite);
     content: "";
 }
@@ -68,4 +137,14 @@ svg::after {
 #landing-section {
     margin-top: 3rem;
     text-align: center;
+    position: relative;
+}
+
+#contact-section {
+    text-align: center;
+}
+
+footer p {
+    text-align: center;
+    font-size: 1rem;
 }
