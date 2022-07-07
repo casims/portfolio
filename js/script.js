@@ -2,7 +2,34 @@ const port = {
     target: document.querySelector('main#main'),
     jsonURLMain:'https://casims.ca/csport/wp-json/wp/v2/csp-project?_embed',
     jsonURLProject: null,
+    onSite: null,
     contentHTML: '',
+    navMenu: `
+        <nav id="site-navigation">
+            <ul>
+                <li>
+                    <a href="#main">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M12 6.453l9 8.375v9.172h-6v-6h-6v6h-6v-9.172l9-8.375zm12 5.695l-12-11.148-12 11.133 1.361 1.465 10.639-9.868 10.639 9.883 1.361-1.465z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#projects">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M.026 24l11.974-11.607 11.974 11.607h-23.948zm11.964-23.961l-11.99 8.725v12.476l7.352-7.127-5.653-4.113 10.291-7.488 10.309 7.488-5.655 4.108 7.356 7.132v-12.476l-12.01-8.725z"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>`,
     linkedinLink: `
         <a href="https://www.linkedin.com/in/connorasims/">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -22,14 +49,27 @@ const port = {
             <p id="email-copy">connor@casims.ca</p>`,
     checkURL: function() {
         let capturedURL = window.location.href;
-        scroll(0,0);
         if (capturedURL.includes('#')) {
             let hashPosition = capturedURL.indexOf('#')+1;
             let capturedID = capturedURL.substring(hashPosition);
-            this.jsonURLProject = `https://casims.ca/csport/wp-json/wp/v2/csp-project/${capturedID}?_embed`;
-            this.outputContentProject();
+            if (isNaN(capturedID) && this.onSite === true) {
+                return;
+            } else if (isNaN(capturedID) && this.onSite === false) {
+                this.outputContentMain();
+                this.onSite = true;
+            } else if (isNaN(capturedID) && this.onSite === null) {
+                this.outputContentMain();
+                this.onSite = true;
+            } else {
+                this.jsonURLProject = `https://casims.ca/csport/wp-json/wp/v2/csp-project/${capturedID}?_embed`;
+                scroll(0,0);
+                this.outputContentProject();
+                this.onSite = false;
+            }
         } else {
+            scroll(0,0);
             this.outputContentMain();
+            this.onSite = true;
         };  
     },
     getJSON: async function(url) {
@@ -41,7 +81,8 @@ const port = {
         this.target.innerHTML = '';
         await this.getJSON(this.jsonURLMain);
         console.log(port.jsonData);
-        this.contentHTML = `
+        this.contentHTML = this.navMenu;
+        this.contentHTML += `
             <section id="landing-section">
                 <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 670 506">
                     <path id="Imported Path" fill="none" stroke="black" stroke-width="52" d="M 208.00,28.00 C 108.59,28.00 28.00,108.59 28.00,208.00 28.00,307.41 108.59,388.00 208.00,388.00M 208.00,118.00 C 158.29,118.00 118.00,158.29 118.00,208.00 118.00,257.71 158.29,298.00 208.00,298.00M 507.00,208.00 C 581.56,208.00 642.00,268.44 642.00,343.00 642.00,417.56 581.56,478.00 507.00,478.00M 207.50,388.00 C 207.50,388.00 507.50,388.00 507.50,388.00M 28.00,478.00 C 28.00,478.00 507.50,478.00 507.50,478.00M 207.50,28.00 C 207.50,28.00 642.00,28.00 642.00,28.00M 207.50,118.00 C 207.50,118.00 642.00,118.00 642.00,118.00M 237.50,208.00 C 237.50,208.00 507.50,208.00 507.50,208.00M 207.50,298.00 C 207.50,298.00 507.50,298.00 507.50,298.00" />
@@ -52,7 +93,7 @@ const port = {
                 ${this.linkedinLink}
                 ${this.githubLink}
             </section>
-            <section id="projects-section">
+            <section id="projects">
                 <h2>Projects</h2>`;
             console.log(this.contentHTML);
         this.outputContentMainProjects();
