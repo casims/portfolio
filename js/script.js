@@ -18,7 +18,7 @@ const port = {
     contentContactSection: `
         <section id="contact-section">
             <h2>Contact</h2>
-            <p>Get in touch!</p>
+            <p>I pride myself on a clean inbox.</p>
             <p id="email-copy">connor@casims.ca</p>`,
     checkURL: function() {
         let capturedURL = window.location.href;
@@ -77,9 +77,11 @@ const port = {
             };
             this.contentHTML += `
                     </ul>
-                    <p>${project.acf.proj_duration}</p>
+                    <p class="proj-duration">Project Duration: ${project.acf.proj_duration}</p>
                     <p>${project.acf.proj_overview}</p>
-                    <a href="#${project.id}">Project Details</a>
+                    <div class="link-container">
+                        <a href="#${project.id}">Project Details</a>
+                    </div>
                 </article>
             `;
         }
