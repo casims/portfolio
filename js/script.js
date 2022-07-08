@@ -139,6 +139,9 @@ const port = {
             this.target.innerHTML = this.contentHTML;
         } else {
             this.contentHTML = `
+                <nav id="site-navigation">
+                    <a id="back-button" href="">Back</a>
+                </nav>
                 <section id="project-header-section">
                     <h1>${port.jsonData.title.rendered}</h1>
                     <img src="${port.jsonData['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${port.jsonData['_embedded']['wp:featuredmedia'][0].alt_text}">
@@ -150,7 +153,7 @@ const port = {
             };
             this.contentHTML += `
                     </ul>
-                    <p>${port.jsonData.acf.proj_duration}</p>
+                    <p class="proj-duration">Project Duration: ${port.jsonData.acf.proj_duration}</p>
                     <p>${port.jsonData.acf.proj_overview}</p>
                     <a href="${port.jsonData.acf.proj_live_link}">Live Site</a>
                     <a href="${port.jsonData.acf.proj_github_link}">GitHub Repo</a>
@@ -172,12 +175,12 @@ const port = {
             this.contentHTML += `
                 </section>
                 <section id="project-feat-section">
-                    <h3>Features</h3>
+                    <h2>Features</h2>
                     <p>${port.jsonData.acf.proj_features_intro}</p>`;
             let features = port.jsonData.acf.proj_features_gen;
             for (let feature of features) {
                 this.contentHTML += `
-                    <h4>${feature.proj_feat_gen_heading}</h4>
+                    <h3>${feature.proj_feat_gen_heading}</h3>
                     <p>${feature.proj_feat_gen_text}</p>
                     <code>${feature.proj_feat_gen_code}}</code>`;
                 if (feature.proj_feat_gen_image) {
@@ -193,7 +196,7 @@ const port = {
             this.contentHTML += `
                 </section>
                 <section id="project-skills-section">
-                    <h3>Gained Skills</h3>
+                    <h2>Gained Skills</h2>
                     <ul>`;
             let skills = port.jsonData.acf.proj_skills_list;
             for (let skill of skills) {
@@ -214,9 +217,7 @@ const port = {
             this.contentHTML += this.contentContactSection;
             this.contentHTML += this.linkedinLink;
             this.contentHTML += this.githubLink;
-            this.contentHTML += `
-            </section>
-            <a href="">Back</a>`;
+            this.contentHTML += `</section>`;
             this.target.innerHTML = this.contentHTML;
         };
     },
