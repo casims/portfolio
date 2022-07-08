@@ -37,6 +37,7 @@ article {
     background-color: var(--deeepGray);
     box-shadow: 1px 1px 10px rgb(0 0 0 / 50%);
     padding: 1rem;
+    margin-top: 1.5rem;
 }
 
 article h3 {
@@ -232,24 +233,30 @@ nav {
     right: 0;
     height: 3rem;
     z-index: 9;
-    display: flex;
     background-color: var(--deeepGray);
     box-shadow: 1px 1px 10px rgb(0 0 0 / 50%);
 }
 
 nav ul {
-    width: 100%;
+    width: 60%;
+    max-width: 18rem;
     height: 3rem;
     text-align: center;
-    margin: 0;
-    justify-content: center;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
     align-content: center;
 }
 
+nav ul li {
+    margin: 0;
+}
+
 nav ul li svg {
-    width: 2rem;
-    height: 2rem;
-    margin: .5rem 1rem;
+    display: block;
+    margin: 0 auto;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 #project-header-section a {
@@ -293,11 +300,18 @@ code {
     padding: .25rem .75rem;
     font-size: 1.3rem;
     align-self: center;
-    margin-left: 1rem;
 }
 
 #back-button::before {
     content: "◄";
     position: relative;
     right: .25rem;
+}
+
+#nav-button-container {
+    display: flex;
+    width: 18rem;
+    height: 3rem;
+    margin: 0 auto;
+    justify-content: flex-end;
 }

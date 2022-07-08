@@ -140,7 +140,9 @@ const port = {
         } else {
             this.contentHTML = `
                 <nav id="site-navigation">
-                    <a id="back-button" href="">Back</a>
+                    <div id="nav-button-container">
+                        <a id="back-button" href="">Back</a>
+                    </div>
                 </nav>
                 <section id="project-header-section">
                     <h1>${port.jsonData.title.rendered}</h1>
@@ -157,23 +159,26 @@ const port = {
                     <p>${port.jsonData.acf.proj_overview}</p>
                     <a href="${port.jsonData.acf.proj_live_link}">Live Site</a>
                     <a href="${port.jsonData.acf.proj_github_link}">GitHub Repo</a>
-                </section>
-                <section id="project-sect-section">`;
+                </section>`;
             let sections = port.jsonData.acf.proj_section_gen;
-            for (let section of sections) {
-                this.contentHTML += `
-                        <h3>${section.proj_sect_gen_heading}</h3>
-                        <p>${section.proj_sect_gen_text}</p>`;
-                    if (section.proj_sect_gen_image) {
-                        let imageID = section.proj_sect_gen_image;
-                        let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
-                        let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
-                        this.contentHTML += `
-                        <img src="${capturedImageObj.media_details.sizes.medium_large.source_url}" alt="${capturedImageObj.alt_text}">`;
-                    }
-            };
+            console.log(sections);
+            if (Array.isArray(sections)) {
+                this.contentHTML += `<section id="project-sect-section">`;
+                for (let section of sections) {
+                    this.contentHTML += `
+                            <h3>${section.proj_sect_gen_heading}</h3>
+                            <p>${section.proj_sect_gen_text}</p>`;
+                        if (section.proj_sect_gen_image) {
+                            let imageID = section.proj_sect_gen_image;
+                            let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
+                            let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
+                            this.contentHTML += `
+                            <img src="${capturedImageObj.media_details.sizes.medium_large.source_url}" alt="${capturedImageObj.alt_text}">`;
+                        }
+                };
+                this.contentHTML += `</section>`;
+            }
             this.contentHTML += `
-                </section>
                 <section id="project-feat-section">
                     <h2>Features</h2>
                     <p>${port.jsonData.acf.proj_features_intro}</p>`;
@@ -182,7 +187,7 @@ const port = {
                 this.contentHTML += `
                     <h3>${feature.proj_feat_gen_heading}</h3>
                     <p>${feature.proj_feat_gen_text}</p>
-                    <code>${feature.proj_feat_gen_code}}</code>`;
+                    ${feature.proj_feat_gen_code}`;
                 if (feature.proj_feat_gen_image) {
                     let imageID = feature.proj_feat_gen_image;
                     let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
