@@ -67,6 +67,10 @@ h3 {
     font-size: 1.4rem;
 }
 
+section>h3 {
+    border-right: 6px solid var(--waterCyan);
+}
+
 ul {
     display: flex;
     flex-wrap: wrap;
@@ -187,6 +191,10 @@ a svg {
     margin: .7rem 0.25rem;
 }
 
+#landing-section svg {
+    margin-bottom: 0;
+}
+
 a svg path {
     fill: var(--waterCyan);
 }
@@ -217,7 +225,7 @@ h1::after {
     position: relative;
 }
 
-#contact-section {
+#contact {
     text-align: center;
 }
 
@@ -239,7 +247,7 @@ nav {
 
 nav ul {
     width: 60%;
-    max-width: 18rem;
+    max-width: 16rem;
     height: 3rem;
     text-align: center;
     margin: 0 auto;
@@ -270,6 +278,14 @@ nav ul li svg {
     font-size: 1.1rem;
     padding: .5rem;
     margin: 0 auto .5rem;
+}
+
+#project-skills-section ul {
+    width: 100%;
+    display: initial;
+    text-align: center;
+    margin: 0 auto;
+
 }
 
 code {
@@ -314,4 +330,124 @@ code {
     height: 3rem;
     margin: 0 auto;
     justify-content: flex-end;
+}
+
+@media(min-width: 500px) {
+    body {
+        grid-template:
+        ". m ." auto
+        "f f f" 6rem / auto 24rem auto;
+    }
+    #landing-section {
+        width: 18rem;
+        margin: 3rem auto 5rem;
+    }
+    #email-copy {
+        max-width: 13rem;
+        margin: 0 auto;
+    }
+    #nav-button-container {
+        width: 24rem;
+    }
+}
+
+@media(min-width: 600px) {
+    body {
+        grid-template:
+        ". m ." auto
+        "f f f" 3rem / auto 24rem auto;
+    }
+    nav {
+        top: 0;
+        bottom: 0;
+        right: 1rem;
+        left: initial;
+        height: 100vh;
+        width: 3rem;
+        background-color: initial;
+        box-shadow: initial;
+        display: flex;
+        align-items: center;
+    }
+    nav ul {
+        display: initial;
+        height: initial;
+    }
+    nav ul li {
+        margin: 1rem 0;
+    }
+    nav ul li svg {
+        border: 2px solid var(--waterCyan);
+        padding: .5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    #nav-button-container a {
+        position: absolute;
+        top: 1rem;
+    }
+}
+
+@media(min-width: 900px) {
+    body {
+        grid-template:
+        ". m ." auto
+        "f f f" 3rem / auto 40rem auto;
+    }
+    section {
+        width: 24rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #landing-section {
+        display: flex;
+        width: initial;
+        gap: 1.5rem;
+    }
+    #landing-section #text-container {
+        width: 27rem;
+    }
+    #landing-section #text-container #main-title {
+        margin-top: 0;
+    }
+    #main-title::before {
+        background-color: initial;
+    }
+}
+
+@media(min-width: 1200px) {
+    body {
+        grid-template:
+        ". m ." auto
+        "f f f" 3rem / auto 58rem auto;
+    }
+    #landing-section {
+        align-items: center;
+        margin-top: 8rem;
+    }
+    #landing-section #main-title {
+        font-size: 4rem;
+    }
+    #landing-section #text-container {
+        width: 50rem;
+    }
+    section {
+        width: 32rem;
+    }
+    article {
+        width: 18rem;
+        margin-left: .75rem;
+        margin-right: .75rem;
+    }
+    #projects {
+        width: 58rem;
+    }
+    #projects h2 {
+        width: 32rem;
+        margin: 0 auto;
+    }
+    #projects #projects-container {
+        display: flex;
+        justify-content: center;
+    }
 }

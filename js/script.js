@@ -43,7 +43,7 @@ const port = {
             </svg>
         </a>`,
     contentContactSection: `
-        <section id="contact-section">
+        <section id="contact">
             <h2>Contact</h2>
             <p>I pride myself on a clean inbox.</p>
             <p id="email-copy">connor@casims.ca</p>`,
@@ -87,17 +87,22 @@ const port = {
                 <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 670 506">
                     <path id="Imported Path" fill="none" stroke="black" stroke-width="52" d="M 208.00,28.00 C 108.59,28.00 28.00,108.59 28.00,208.00 28.00,307.41 108.59,388.00 208.00,388.00M 208.00,118.00 C 158.29,118.00 118.00,158.29 118.00,208.00 118.00,257.71 158.29,298.00 208.00,298.00M 507.00,208.00 C 581.56,208.00 642.00,268.44 642.00,343.00 642.00,417.56 581.56,478.00 507.00,478.00M 207.50,388.00 C 207.50,388.00 507.50,388.00 507.50,388.00M 28.00,478.00 C 28.00,478.00 507.50,478.00 507.50,478.00M 207.50,28.00 C 207.50,28.00 642.00,28.00 642.00,28.00M 207.50,118.00 C 207.50,118.00 642.00,118.00 642.00,118.00M 237.50,208.00 C 237.50,208.00 507.50,208.00 507.50,208.00M 207.50,298.00 C 207.50,298.00 507.50,298.00 507.50,298.00" />
                 </svg>
-                <h1 id="main-title"><span>Connor</span>Sims</h1>
-                <p>Entry-level Front-End Engineer with a passion for working with JavaScript and problem solving.</p>
-                <p id="email-copy">connor@casims.ca</p>
-                ${this.linkedinLink}
-                ${this.githubLink}
+                <div id="text-container">
+                    <h1 id="main-title"><span>Connor</span>Sims</h1>
+                    <p>Entry-level Front-End Engineer with a passion for working with JavaScript and problem solving.</p>
+                    <p id="email-copy">connor@casims.ca</p>
+                    ${this.linkedinLink}
+                    ${this.githubLink}
+                </div>
             </section>
             <section id="projects">
                 <h2>Projects</h2>`;
             console.log(this.contentHTML);
+        this.contentHTML += `<div id="projects-container">`;
         this.outputContentMainProjects();
-        this.contentHTML += `</section>`;
+        this.contentHTML += `
+                    </div>
+                    </section>`;
         this.contentHTML += this.contentContactSection;
         this.contentHTML += this.linkedinLink;
         this.contentHTML += this.githubLink;
