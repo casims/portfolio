@@ -1,5 +1,6 @@
 const port = {
     target: document.querySelector('main#main'),
+    loading: document.getElementById('loading'),
     jsonURLMain:'https://casims.ca/csport/wp-json/wp/v2/csp-project?_embed',
     jsonURLProject: null,
     onSite: null,
@@ -80,6 +81,7 @@ const port = {
 
     outputContentMain: async function() {
         this.target.innerHTML = '';
+        loading.style.display = 'block';
         await this.getJSON(this.jsonURLMain);
         console.log(port.jsonData);
         this.contentHTML = this.navMenu;
@@ -108,6 +110,7 @@ const port = {
         this.contentHTML += this.linkedinLink;
         this.contentHTML += this.githubLink;
         this.contentHTML += `</section>`;
+        loading.style.display = 'none';
         this.target.innerHTML = this.contentHTML;
     },
     outputContentMainProjects: function() {
@@ -136,6 +139,7 @@ const port = {
 
     outputContentProject: async function() {
         this.target.innerHTML = '';
+        loading.style.display = 'block';
         await this.getJSON(this.jsonURLProject);
         console.log(port.jsonData);
         if (port.jsonData.code) {
@@ -235,6 +239,7 @@ const port = {
             this.contentHTML += this.linkedinLink;
             this.contentHTML += this.githubLink;
             this.contentHTML += `</section>`;
+            loading.style.display = 'none';
             this.target.innerHTML = this.contentHTML;
         };
     },

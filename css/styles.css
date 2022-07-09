@@ -289,15 +289,9 @@ nav ul li svg {
 
 }
 
-code {
-    background-color: var(--deeepGray);
-    color: var(--waterCyan);
-    display: block;
-    padding: 1rem;
-    border-radius: 10px;
+iframe {
+    height: 25rem;
     margin-bottom: 1.5rem;
-    overflow: auto;
-    box-shadow: 1px 1px 10px rgb(0 0 0 / 50%);
 }
 
 #project-skills-section ul li {
@@ -307,6 +301,8 @@ code {
 #project-gallery {
     display: flex;
     overflow: auto;
+    max-width: 48rem;
+    margin: 0 auto;
 }
 
 #back-button {
@@ -331,6 +327,14 @@ code {
     height: 3rem;
     margin: 0 auto;
     justify-content: flex-end;
+}
+
+#loading {
+    width: 150px;
+    height: 150px;
+    margin: 10rem auto 0;
+    display: block;
+    grid-area: m;
 }
 
 @media(min-width: 500px) {
