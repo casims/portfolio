@@ -128,7 +128,7 @@ a {
     text-decoration: none;
 }
 
-#email-copy {
+.email-copy {
     font-family: 'Inconsolata', 'Courier New', Courier, monospace;
     font-weight: bolder;
     background-color: var(--waterCyan);
@@ -138,6 +138,7 @@ a {
     margin-left: 2.5rem;
     margin-right: 2.5rem;
     margin-bottom: 0rem;
+    display: block;
 }
 
 body {
@@ -342,7 +343,7 @@ code {
         width: 18rem;
         margin: 3rem auto 5rem;
     }
-    #email-copy {
+    .email-copy {
         max-width: 13rem;
         margin: 0 auto;
     }
@@ -424,6 +425,10 @@ code {
     #landing-section {
         align-items: center;
         margin-top: 8rem;
+        margin-bottom: 10rem;
+    }
+    #landing-section::after {
+        bottom: -5rem;
     }
     #landing-section #main-title {
         font-size: 4rem;
