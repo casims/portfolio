@@ -1,0 +1,11 @@
+# Ignore loose files in root directory (favicon files mainly)
+portfolio/*
+
+# Un-ignore subfolders in root directory
+!portfolio/*/
+
+# Un-ignore index.html
+!index.html
+
+# Un-ignore .gitattributes
+!.gitattributes.txt
