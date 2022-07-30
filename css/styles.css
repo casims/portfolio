@@ -7,6 +7,10 @@
     --deeepGray: #121212; 
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* TYPOGRAPHY */
 
 h1,
@@ -267,6 +271,10 @@ iframe {
     justify-content: flex-end;
 }
 
+#toolkit-section {
+    text-align: center;
+}
+
 /* PSEUDO-ELEMENTS */
 
 article h3::after {
@@ -343,6 +351,13 @@ a svg path {
     margin: 15rem auto 0;
     display: block;
     grid-area: m;
+}
+
+#toolkit-section svg {
+    width: 3rem;
+    height: 3rem;
+    margin: .5rem;
+    fill: var(--waterCyan);
 }
 
 /* MEDIA QUERIES */
