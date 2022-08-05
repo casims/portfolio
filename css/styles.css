@@ -11,6 +11,10 @@ html {
     scroll-behavior: smooth;
 }
 
+.svg-hover > * {
+    pointer-events: none;
+}
+
 /* TYPOGRAPHY */
 
 h1,
@@ -102,7 +106,7 @@ a {
     margin-right: 2.5rem;
     margin-bottom: 0rem;
     display: block;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 .email-copy:hover {
@@ -110,7 +114,7 @@ a {
 }
 
 .social-link svg path {
-    transition: all 0.2s ease;
+    transition: fill 0.2s ease;
 }
 
 .social-link svg path:hover {
@@ -143,11 +147,19 @@ footer p {
     padding: .25rem .75rem;
     font-size: 1.3rem;
     align-self: center;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 #back-button:hover {
     background-color: var(--tuskWhite);
+}
+
+#tool-output-text {
+    font-family: 'Inconsolata', 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    background-color: var(--waterCyan);
+    color: var(--underBlue);
+    font-size: 1.5rem;
 }
 
 /* LAYOUT */
@@ -187,7 +199,7 @@ article {
     left: 0;
     width: 9.25rem;
     margin: 0 auto;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 .card-proj-link:hover {
@@ -273,7 +285,7 @@ nav ul li svg {
 }
 
 nav ul li svg path {
-    transition: all 0.2s ease;
+    transition: fill 0.2s ease;
 }
 
 nav ul li svg path:hover {
@@ -322,7 +334,23 @@ iframe {
 }
 
 #toolkit-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     text-align: center;
+}
+
+#tool-output-container {
+    flex-basis: 100%;
+    margin-top: .5rem;
+}
+
+#tool-output-text {
+    height: 2.5rem;
+    width: 6px;
+    margin: 0 auto;
+    padding: .45rem 0;
+    transition: width .1s;
 }
 
 /* PSEUDO-ELEMENTS */
@@ -415,8 +443,13 @@ a svg path {
 #toolkit-section svg {
     width: 3rem;
     height: 3rem;
-    margin: .5rem;
     fill: var(--waterCyan);
+}
+
+div.svg-hover {
+    width: 4rem;
+    height: 4rem;
+    padding: .5rem;
 }
 
 /* MEDIA QUERIES */
@@ -495,12 +528,19 @@ a svg path {
         display: flex;
         width: initial;
         gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    #landing-section::after {
+        display: none;
     }
     #landing-section #text-container {
         width: 27rem;
     }
     #landing-section #text-container #main-title {
         margin-top: 0;
+    }
+    #toolkit-section {
+        max-width: 32rem;
     }
     #main-title::before {
         background-color: initial;
@@ -520,7 +560,7 @@ a svg path {
     #landing-section {
         align-items: center;
         margin-top: 8rem;
-        margin-bottom: 10rem;
+        margin-bottom: 2rem;
     }
     #landing-section::after {
         bottom: -5rem;
