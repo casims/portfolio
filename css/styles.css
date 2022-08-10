@@ -306,7 +306,44 @@ nav ul li svg path:hover {
     display: initial;
     text-align: center;
     margin: 0 auto;
+}
 
+.accord {
+    background-color: #242424;
+    box-shadow: 1px 1px 10px rgb(0 0 0 / 50%);
+    padding: 1rem;
+    position: relative;
+    height: calc(26px + 3rem);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accord h3 {
+    margin: -1rem -1rem 1.5rem;
+    background-color: var(--deeepGray);
+    padding: 1.5rem 1rem 1.5rem;
+    box-shadow: 1px 1px 10px rgb(0 0 0 / 50%);
+}
+
+.accord svg {
+    position: absolute;
+    top: 1.6rem;
+    right: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    pointer-events: none;
+}
+
+.accord svg path {
+    fill: var(--waterCyan);
+}
+
+section.accord {
+    margin-bottom: 2rem;
+}
+
+section.accord.expanded {
+    height: auto;
 }
 
 iframe {
