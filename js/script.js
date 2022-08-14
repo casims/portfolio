@@ -53,6 +53,14 @@ const port = {
             <h2 tabindex="0">Contact</h2>
             <p>I pride myself on a clean inbox.</p>
             <a class="email-copy" href="mailto:connor@casims.ca">connor@casims.ca</a>`,
+    imageModal: `
+        <div id="image-modal">
+            <span id="modal-close">&times;</span>
+                <div id="modal-inner-wrapper">
+                    <img id="modal-img"></img>
+                    <p id="modal-alt"></p>
+                </div>
+        </div>`,
     toolNames: ['HTML5', 'CSS3', 'JavaScript', 'React', 'jQuery', 'SASS', 'PHP', 'MySQL'],
     checkURL: function() {
         let capturedURL = window.location.href;
@@ -158,6 +166,7 @@ const port = {
         this.contentHTML += this.linkedinLink;
         this.contentHTML += this.githubLink;
         this.contentHTML += `</section>`;
+        this.contentHTML += this.imageModal;
         loading.style.display = 'none';
         this.target.innerHTML = this.contentHTML;
         this.toolkitListeners();
@@ -293,27 +302,33 @@ const port = {
             this.contentHTML += `
                     </ul>
                 </section>
-                <div id="project-gallery">`;
+                <section id="project-gallery">
+                <ul>`;
             let galleryImages = port.jsonData.acf.proj_images;
             for (let galleryImage of galleryImages) {
                 let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
                 let capturedImageObj = arrayOfImageObjs.find(o => o.id === galleryImage);
                 this.contentHTML += `
-                    <img src="${capturedImageObj.media_details.sizes.medium_large.source_url}" alt="${capturedImageObj.alt_text}">`;
+                    <li>
+                        <img class="modable" src="${capturedImageObj.media_details.sizes.medium_large.source_url}" alt="${capturedImageObj.alt_text}">
+                    </li>`;
             };
-            this.contentHTML += `</div>`;
+            this.contentHTML += `
+                </ul>
+                </section>`;
             this.contentHTML += this.contentContactSection;
             this.contentHTML += this.linkedinLink;
             this.contentHTML += this.githubLink;
             this.contentHTML += `</section>`;
+            this.contentHTML += this.imageModal;
             loading.style.display = 'none';
             this.target.innerHTML = this.contentHTML;
             this.accordListeners();
+            this.modalListeners();
         };
     },
     accordListeners: function() {
         let accordSections = document.getElementsByClassName('accord');
-        console.log(accordSections);
         document.addEventListener('click', (event) => {
             if (event.target.classList.contains('accord-button')) {
                 if (event.target.parentElement.classList.contains('expanded')) {
@@ -327,6 +342,32 @@ const port = {
                     event.target.parentElement.classList.add('expanded');
                 };
             };
+        });
+    },
+    modalListeners: function() {
+        let modal = document.getElementById('image-modal');
+        let modalWrapper = document.getElementById('modal-inner-wrapper');
+        let modalPartImage = document.getElementById('modal-img');
+        let modalPartCaption = document.getElementById('modal-alt');
+        let modableImages = document.getElementsByClassName('modable');
+        for (let i = 0; i < modableImages.length; i++) {
+            modableImages[i].addEventListener('click', function(event) {
+                modal.style.display = 'block';
+                modalPartImage.src = event.target.src;
+                modalPartCaption.innerHTML = event.target.alt;
+                setTimeout(function() {
+                    modal.style.opacity = '100%';
+                }, 10);
+            });
+        };
+        modal.addEventListener('click', function() {
+            modal.style.opacity = '0%';
+            setTimeout(function() {
+                modal.style.display = 'none';
+            }, 300);
+        });
+        modalWrapper.addEventListener('click', function(event) {
+            event.stopPropagation();
         });
     },
 };

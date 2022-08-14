@@ -356,10 +356,21 @@ iframe {
 }
 
 #project-gallery {
-    display: flex;
-    overflow: auto;
     max-width: 48rem;
-    margin: 0 auto;
+    margin: 0 auto 5rem;
+}
+
+#project-gallery ul {
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: center;
+    width: 100%;
+}
+
+#project-gallery li {
+    margin: 0;
+    width: 48%;
+    max-width: 250px;
 }
 
 #nav-button-container {
@@ -489,6 +500,54 @@ div.svg-hover {
     padding: .5rem;
 }
 
+/* IMAGE MODAL */
+
+#image-modal {
+    background-color: rgba(18, 18, 18, .8);
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 99;
+    display: none;
+    opacity: 0%;
+    transition: opacity 0.3s ease;
+}
+
+#modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    color: var(--tuskWhite);
+    font-family: 'Inconsolata', 'Courier New', Courier, monospace;
+    font-size: 3rem;
+    font-weight: 900;
+    user-select: none;
+}
+
+#modal-inner-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    top: 10vh;
+}
+
+#modal-img {
+    width: 100%;
+}
+
+.modable {
+    cursor: pointer;
+}
+
+.modable:hover {
+    opacity: 80%;
+    transition: opacity 0.3s ease;
+}
+
 /* MEDIA QUERIES */
 
 @media(min-width: 500px) {
@@ -585,6 +644,9 @@ div.svg-hover {
     .card-text-container {
         width: 80%;
         margin: 0 auto;
+    }
+    #modal-inner-wrapper {
+        width: 80%;
     }
 }
 
