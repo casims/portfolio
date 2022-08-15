@@ -62,6 +62,7 @@ const port = {
                 </div>
         </div>`,
     toolNames: ['HTML5', 'CSS3', 'JavaScript', 'React', 'jQuery', 'SASS', 'PHP', 'MySQL'],
+    accordHeightCollapsed: 'calc(26px + 3rem)',
     checkURL: function() {
         let capturedURL = window.location.href;
         if (capturedURL.includes('#')) {
@@ -327,22 +328,33 @@ const port = {
             this.modalListeners();
         };
     },
+    accordExpand: function(accord) {
+        let accordHeight = accord.scrollHeight;
+        accord.style.height = accordHeight + 'px';
+        accord.setAttribute('expanded', 'true');
+    },
+    accordCollapse: function(accord) {
+        accord.style.height = this.accordHeightCollapsed;
+        accord.setAttribute('expanded', 'false');
+    },
     accordListeners: function() {
         let accordSections = document.getElementsByClassName('accord');
-        document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('accord-button')) {
-                if (event.target.parentElement.classList.contains('expanded')) {
+        let accordButtons = document.getElementsByClassName('accord-button');
+        port.accordExpand(accordSections[0]);
+        for (let i = 0; i < accordButtons.length; i++) {
+            accordButtons[i].addEventListener('click', function(event) {
+                let accordTarget = event.target.parentElement;
+                let isAccordExpanded = accordTarget.getAttribute('expanded') === 'true';
+                if (!isAccordExpanded) {
                     for (let accordSection of accordSections) {
-                        accordSection.classList.remove('expanded');
+                        port.accordCollapse(accordSection);
                     };
+                    port.accordExpand(accordTarget);
                 } else {
-                    for (let accordSection of accordSections) {
-                        accordSection.classList.remove('expanded');
-                    };
-                    event.target.parentElement.classList.add('expanded');
+                    port.accordCollapse(accordTarget);
                 };
-            };
-        });
+            });
+        };
     },
     modalListeners: function() {
         let modal = document.getElementById('image-modal');
