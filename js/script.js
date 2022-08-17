@@ -1,3 +1,5 @@
+'use strict';
+
 const port = {
     target: document.querySelector('main#main'),
     loading: document.getElementById('loading'),
@@ -11,21 +13,21 @@ const port = {
             <ul>
                 <li>
                     <a href="#main">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <svg class="nav-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M12 6.453l9 8.375v9.172h-6v-6h-6v6h-6v-9.172l9-8.375zm12 5.695l-12-11.148-12 11.133 1.361 1.465 10.639-9.868 10.639 9.883 1.361-1.465z"/>
                         </svg>
                     </a>
                 </li>
                 <li>
                     <a href="#projects">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <svg class="nav-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/>
                         </svg>
                     </a>
                 </li>
                 <li>
                     <a href="#contact">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <svg class="nav-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M.026 24l11.974-11.607 11.974 11.607h-23.948zm11.964-23.961l-11.99 8.725v12.476l7.352-7.127-5.653-4.113 10.291-7.488 10.309 7.488-5.655 4.108 7.356 7.132v-12.476l-12.01-8.725z"/>
                         </svg>
                     </a>
@@ -170,6 +172,7 @@ const port = {
         this.contentHTML += this.imageModal;
         loading.style.display = 'none';
         this.target.innerHTML = this.contentHTML;
+        this.navMenuListeners();
         this.toolkitListeners();
     },
     outputContentMainProjects: function() {
@@ -195,19 +198,34 @@ const port = {
             `;
         }
     },
+    navMenuListeners: function() {
+        let navButtons = document.getElementsByClassName('nav-button');
+        for (let i = 0; i < navButtons.length; i++) {
+            navButtons[i].addEventListener('mouseover', function(event) {
+                event.target.children[0].style.fill = 'var(--tuskWhite)';
+                event.target.style.borderColor = 'var(--tuskWhite)';
+            });
+            navButtons[i].addEventListener('mouseleave', function(event) {
+                event.target.children[0].style.fill = '';
+                event.target.style.borderColor = '';
+            });
+        };
+    },
     toolkitListeners: function() {
         let toolOutput = document.getElementById('tool-output-text');
-        document.addEventListener('mouseover', (event) => {
-            if (event.target.classList.contains('svg-hover')) {
+        let toolSVGs = document.getElementsByClassName('svg-hover');
+        for (let i = 0; i < toolSVGs.length; i++) {
+            toolSVGs[i].addEventListener('mouseover', function(event) {
                 let toolClasses = event.target.classList;
                 let capturedToolID = toolClasses[1];
                 toolOutput.style.width = '13rem';
-                toolOutput.innerHTML = this.toolNames[parseInt(capturedToolID)];
-            } else {
+                toolOutput.innerHTML = port.toolNames[parseInt(capturedToolID)];
+            });
+            toolSVGs[i].addEventListener('mouseleave', function() {
                 toolOutput.style.width = '6px';
                 toolOutput.innerHTML = '';
-            };
-        });
+            });
+        };
     },
     outputContentProject: async function() {
         this.target.innerHTML = '';

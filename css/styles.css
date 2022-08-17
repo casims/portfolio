@@ -15,6 +15,10 @@ html {
     pointer-events: none;
 }
 
+.nav-button path {
+    pointer-events: none;
+}
+
 /* TYPOGRAPHY */
 
 h1,
@@ -282,14 +286,13 @@ nav ul li svg {
     margin: 0 auto;
     width: 1.5rem;
     height: 1.5rem;
+    border-color: var(--waterCyan);
+    transition: border-color 0.2s ease;
 }
 
 nav ul li svg path {
+    fill: var(--waterCyan);
     transition: fill 0.2s ease;
-}
-
-nav ul li svg path:hover {
-    fill: var(--tuskWhite);
 }
 
 .proj-text-container {
@@ -546,8 +549,8 @@ div.svg-hover {
 }
 
 .modable:hover {
-    opacity: 80%;
-    transition: opacity 0.3s ease;
+    filter: brightness(50%);
+    transition: all 0.3s ease;
 }
 
 /* MEDIA QUERIES */
