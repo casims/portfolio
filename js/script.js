@@ -66,19 +66,23 @@ const port = {
     toolNames: ['HTML5', 'CSS3', 'JavaScript', 'React', 'jQuery', 'SASS', 'PHP', 'MySQL'],
     accordHeightCollapsed: 'calc(26px + 3rem)',
     checkURL: function() {
+        // Checks if URL has hash in it, if hash is from a project link then loads said project's page
         let capturedURL = window.location.href;
         if (capturedURL.includes('#')) {
             let hashPosition = capturedURL.indexOf('#')+1;
             let capturedID = capturedURL.substring(hashPosition);
+            // Ignores function if hash link is from "standard" nav link instead of project link, allows nav hash links to function normally
             if (isNaN(capturedID) && this.onSite === true) {
                 return;
             } else if (isNaN(capturedID) && this.onSite === false) {
                 this.outputContentMain();
                 this.onSite = true;
             } else if (isNaN(capturedID) && this.onSite === null) {
+                // if "onSite === null" then user is starting a new session on the site, which means main page should load
                 this.outputContentMain();
                 this.onSite = true;
             } else {
+                // Grabs Project URL from project link button, then plugs it into the API URL template to grab the project JSON data from WordPress
                 this.jsonURLProject = `https://casims.ca/csport/wp-json/wp/v2/csp-project/${capturedID}?_embed`;
                 scroll(0,0);
                 this.outputContentProject();
@@ -91,10 +95,12 @@ const port = {
         };  
     },
     getJSON: async function(url) {
+        // Grabs JSON data, can be used for both main page and project pages
         const response = await fetch(url);
         return port.jsonData = await response.json();
     },
     outputContentMain: async function() {
+        // Outputs HTML for main page
         this.target.innerHTML = '';
         loading.style.display = 'block';
         await this.getJSON(this.jsonURLMain);
@@ -175,6 +181,7 @@ const port = {
         this.toolkitListeners();
     },
     outputContentMainProjects: function() {
+        // Outputs project cards for main page
         for (let project of port.jsonData) {
             this.contentHTML += `
                 <article class="project-card">
@@ -197,6 +204,7 @@ const port = {
         }
     },
     navMenuListeners: function() {
+        // Makes nav buttons on main page change color on hover
         let navButtons = document.getElementsByClassName('nav-button');
         for (let i = 0; i < navButtons.length; i++) {
             navButtons[i].addEventListener('mouseover', function(event) {
@@ -210,6 +218,7 @@ const port = {
         };
     },
     toolkitListeners: function() {
+        // Displays name of language on hover of language icons
         let toolOutput = document.getElementById('tool-output-text');
         let toolSVGs = document.getElementsByClassName('svg-hover');
         for (let i = 0; i < toolSVGs.length; i++) {
@@ -226,6 +235,7 @@ const port = {
         };
     },
     outputContentProject: async function() {
+        // Outputs HTML for individual projects
         this.target.innerHTML = '';
         loading.style.display = 'block';
         await this.getJSON(this.jsonURLProject);
@@ -344,6 +354,7 @@ const port = {
         accord.setAttribute('expanded', 'false');
     },
     accordListeners: function() {
+        // Functionality for accordians on individual project page, also expands first accordian on page load
         let accordSections = document.getElementsByClassName('accord');
         let accordButtons = document.getElementsByClassName('accord-button');
         port.accordExpand(accordSections[0]);
@@ -363,6 +374,7 @@ const port = {
         };
     },
     modalListeners: function() {
+        // Functionality for image modals
         let modal = document.getElementById('image-modal');
         let modalWrapper = document.getElementById('modal-inner-wrapper');
         let modalPartImage = document.getElementById('modal-img');
@@ -390,6 +402,7 @@ const port = {
     },
 };
 
+// "Checks URL" for hash links whenever page loads or URL changes
 window.onload = function() {
     port.checkURL();
 };
