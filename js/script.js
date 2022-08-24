@@ -98,7 +98,6 @@ const port = {
         this.target.innerHTML = '';
         loading.style.display = 'block';
         await this.getJSON(this.jsonURLMain);
-        console.log(port.jsonData);
         this.contentHTML = this.navMenu;
         this.contentHTML += `
             <section id="landing-section">
@@ -107,7 +106,7 @@ const port = {
                 </svg>
                 <div id="text-container">
                     <h1 id="main-title"><span>Connor</span>Sims</h1>
-                    <p>Entry-level Front-End Engineer with a passion for working with JavaScript and problem solving.</p>
+                    <p>Front-End Web Developer with a passion for problem solving and working with JavaScript.</p>
                     <a href="mailto:connor@casims.ca" class="email-copy">connor@casims.ca</a>
                     ${this.linkedinLink}
                     ${this.githubLink}
@@ -190,7 +189,6 @@ const port = {
                 };
                 this.contentHTML += `
                         </ul>
-                        <p class="proj-duration">Project Duration: ${project.acf.proj_duration}</p>
                         <p>${project.acf.proj_overview}</p>
                     </div>
                         <a href="#${project.id}" class="card-proj-link">Project Details</a>
@@ -231,7 +229,6 @@ const port = {
         this.target.innerHTML = '';
         loading.style.display = 'block';
         await this.getJSON(this.jsonURLProject);
-        console.log(port.jsonData);
         if (port.jsonData.code) {
             this.contentHTML = `
                 <nav id="site-navigation">
@@ -267,9 +264,13 @@ const port = {
                         <a href="${port.jsonData.acf.proj_live_link}" target="_blank">Live Site</a>
                         <a href="${port.jsonData.acf.proj_github_link}" target="_blank">GitHub Repo</a>
                     </div>
+                </section>
+                <section id="project-skills-section" class="accord">
+                    <h3 tabindex="0" class="accord-button">What I Learned</h3>
+                    ${this.arrowSVG}
+                    <p>${port.jsonData.acf.proj_skills_list}</p>
                 </section>`;
             let sections = port.jsonData.acf.proj_section_gen;
-            console.log(sections);
             if (Array.isArray(sections)) {
                 this.contentHTML += `<section id="project-sect-section" class="accord">`;
                 for (let section of sections) {
@@ -301,25 +302,12 @@ const port = {
                 if (feature.proj_feat_gen_image) {
                     let imageID = feature.proj_feat_gen_image;
                     let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
-                    console.log(arrayOfImageObjs);
                     let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
-                    console.log(capturedImageObj);
                     this.contentHTML += `
                         <img src="${capturedImageObj.source_url}" alt="${capturedImageObj.alt_text}">`;
                 };
             };
             this.contentHTML += `
-                </section>
-                <section id="project-skills-section" class="accord">
-                    <h3 tabindex="0" class="accord-button">Takeaways</h3>
-                    ${this.arrowSVG}
-                    <ul>`;
-            let skills = port.jsonData.acf.proj_skills_list;
-            for (let skill of skills) {
-                this.contentHTML += `<li>${skill.proj_skill_item}</li>`;
-            };
-            this.contentHTML += `
-                    </ul>
                 </section>
                 <section id="project-gallery">
                 <ul>`;
@@ -329,7 +317,7 @@ const port = {
                 let capturedImageObj = arrayOfImageObjs.find(o => o.id === galleryImage);
                 this.contentHTML += `
                     <li>
-                        <img class="modable" src="${capturedImageObj.media_details.sizes.medium_large.source_url}" alt="${capturedImageObj.alt_text}">
+                        <img class="modable" src="${capturedImageObj.media_details.sizes.full.source_url}" alt="${capturedImageObj.alt_text}">
                     </li>`;
             };
             this.contentHTML += `
