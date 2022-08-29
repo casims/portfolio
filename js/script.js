@@ -185,10 +185,16 @@ const port = {
         for (let project of port.jsonData) {
             this.contentHTML += `
                 <article class="project-card">
-                    <img src="${project['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${project['_embedded']['wp:featuredmedia'][0].alt_text}">
+                    <a href="#${project.id}" class="card-standard-link">
+                        <img src="${project['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${project['_embedded']['wp:featuredmedia'][0].alt_text}">
+                    </a>
                     <div class="card-text-container">
-                        <h3 tabindex="0">${project.title.rendered}</h3>
-                        <h4 tabindex="0">${project.acf.proj_sub_title}</h4>
+                        <a href="#${project.id}" class="card-standard-link">
+                            <h3 tabindex="0">${project.title.rendered}</h3>
+                        </a>
+                        <a href="#${project.id}" class="card-standard-link">
+                            <h4 tabindex="0">${project.acf.proj_sub_title}</h4>
+                        </a>
                         <ul>`;
                 let terms = project['_embedded']['wp:term'][0];
                 for (let term of terms) {
@@ -269,7 +275,6 @@ const port = {
                 };
                 this.contentHTML += `
                         </ul>
-                        <p class="proj-duration">Project Duration: ${port.jsonData.acf.proj_duration}</p>
                         <p>${port.jsonData.acf.proj_overview}</p>
                         <a href="${port.jsonData.acf.proj_live_link}" target="_blank">Live Site</a>
                         <a href="${port.jsonData.acf.proj_github_link}" target="_blank">GitHub Repo</a>
