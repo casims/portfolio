@@ -682,7 +682,7 @@ div.svg-hover {
     body {
         grid-template:
         ". m ." auto
-        "f f f" 3rem / auto 58rem auto;
+        "f f f" 3rem / auto 59rem auto;
     }
     #landing-section {
         align-items: center;
@@ -718,7 +718,7 @@ div.svg-hover {
         align-content: flex-start;
     }
     #projects {
-        width: 58rem;
+        width: 59rem;
     }
     #projects h2 {
         width: 32rem;
@@ -726,6 +726,7 @@ div.svg-hover {
     }
     #projects #projects-container {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
     }
 }
