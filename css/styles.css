@@ -1,0 +1,17 @@
+/* FONT IMPORTS */
+
+@font-face {
+    font-family: 'roboto_monoregular';
+    src: url('../fonts/robotomono-variablefont_wght-webfont.woff2') format('woff2'),
+         url('../fonts/robotomono-variablefont_wght-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ibm_plex_sansregular';
+    src: url('../fonts/ibmplexsans-regular-webfont.woff2') format('woff2'),
+         url('../fonts/ibmplexsans-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
