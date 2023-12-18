@@ -247,21 +247,22 @@ const port = {
         // Outputs tool tags for both the landing section and projects
         let usedToolsArray = [];
         if (!usedTools) {
-            usedToolsArray = [
-                {name: 'HTML5'},
-                {name: 'CSS3'},
-                {name: 'SASS'},
-                {name: 'Bootstrap'},
-                {name: 'Tailwind'},
-                {name: 'JavaScript'},
-                {name: 'React'},
-                {name: 'jQuery'},
-                {name: 'WordPress'},
-                {name: 'PHP'},
-                {name: 'MySQL'},
-                {name: 'GitHub'},
-                {name: 'Linux'},
-            ];
+            // usedToolsArray = [
+            //     {name: 'HTML5'},
+            //     {name: 'CSS3'},
+            //     {name: 'SASS'},
+            //     {name: 'Bootstrap'},
+            //     {name: 'Tailwind'},
+            //     {name: 'JavaScript'},
+            //     {name: 'React'},
+            //     {name: 'jQuery'},
+            //     {name: 'WordPress'},
+            //     {name: 'PHP'},
+            //     {name: 'MySQL'},
+            //     {name: 'GitHub'},
+            //     {name: 'Linux'},
+            // ];
+            usedToolsArray = port.tools;
         } else {
             usedToolsArray = usedTools;
         };
