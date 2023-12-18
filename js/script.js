@@ -169,7 +169,6 @@ const port = {
                     <p id="modal-alt"></p>
                 </div>
         </div>`,
-    toolNames: ['HTML5', 'CSS3', 'JavaScript', 'React', 'jQuery', 'SASS', 'PHP', 'MySQL'],
     accordHeightCollapsed: 'calc(26px + 3rem)',
     checkURL: function() {
         // Checks if URL has hash in it, if hash is from a project link then loads said project's page
@@ -233,8 +232,8 @@ const port = {
         this.contentHTML += `<div id="projects-container">`;
         this.outputContentMainProjects();
         this.contentHTML += `
-                    </div>
-                    </section>`;
+                </div>
+            </section>`;
         this.contentHTML += this.contentContactSection;
         this.contentHTML += this.linkedinLink;
         this.contentHTML += this.githubLink;
@@ -243,23 +242,7 @@ const port = {
         loading.style.display = 'none';
         this.target.innerHTML = this.contentHTML;
         this.navMenuListeners();
-        // this.toolkitListeners();
     },
-    // usedToolsArray: [
-    //     {name: 'HTML5'},
-    //     {name: 'CSS3'},
-    //     {name: 'SASS'},
-    //     {name: 'Bootstrap'},
-    //     {name: 'Tailwind'},
-    //     {name: 'JavaScript'},
-    //     {name: 'React'},
-    //     {name: 'jQuery'},
-    //     {name: 'WordPress'},
-    //     {name: 'PHP'},
-    //     {name: 'MySQL'},
-    //     {name: 'GitHub'},
-    //     {name: 'Linux'},
-    // ],
     outputContentTools: function(usedTools) {
         // Outputs tool tags for both the landing section and projects
         let usedToolsArray = [];
@@ -279,6 +262,8 @@ const port = {
                 {name: 'GitHub'},
                 {name: 'Linux'},
             ];
+        } else {
+            usedToolsArray = usedTools;
         };
         this.contentHTML += `<ul class="tool-tags">`;
         for (let tool of port.tools) {
@@ -305,20 +290,14 @@ const port = {
                         </a>
                         <a href="#${project.id}" class="card-standard-link">
                             <h4 tabindex="0">${project.acf.proj_sub_title}</h4>
-                        </a>
-                        <ul>`;
-                let terms = project['_embedded']['wp:term'][0];
-                for (let term of terms) {
-                this.contentHTML += `<li>${term.name}</li>`;
-                };
-                this.contentHTML += `
-                        </ul>
+                        </a>`;
+            this.outputContentTools(project['_embedded']['wp:term'][0]);
+            this.contentHTML += `
                         <p>${project.acf.proj_overview}</p>
                     </div>
                         <a href="#${project.id}" class="card-proj-link">Project Details</a>
-                </article>
-            `;
-        }
+                </article>`;
+        };
     },
     navMenuListeners: function() {
         // Makes nav buttons on main page change color on hover
@@ -379,14 +358,9 @@ const port = {
                     <img src="${port.jsonData['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${port.jsonData['_embedded']['wp:featuredmedia'][0].alt_text}">
                     <div class="proj-text-container">
                         <h2 tabindex="0">${port.jsonData.acf.proj_sub_title}</h2>
-                        <ul>`;
-                let terms = port.jsonData['_embedded']['wp:term'][0];
-                for (let term of terms) {
-                    this.contentHTML += `<li>${term.name}</li>`;
-                };
+                        <p>${port.jsonData.acf.proj_overview}</p>`;
+                this.outputContentTools(port.jsonData['_embedded']['wp:term'][0])
                 this.contentHTML += `
-                        </ul>
-                        <p>${port.jsonData.acf.proj_overview}</p>
                         <a href="${port.jsonData.acf.proj_live_link}" target="_blank">Live Site</a>
                         <a href="${port.jsonData.acf.proj_github_link}" target="_blank">GitHub Repo</a>
                     </div>
