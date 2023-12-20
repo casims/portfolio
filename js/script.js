@@ -238,7 +238,7 @@ const port = {
         this.contentHTML += this.linkedinLink;
         this.contentHTML += this.githubLink;
         this.contentHTML += `</section>`;
-        this.contentHTML += this.imageModal;
+        // this.contentHTML += this.imageModal;
         loading.style.display = 'none';
         this.target.innerHTML = this.contentHTML;
         this.navMenuListeners();
@@ -247,21 +247,6 @@ const port = {
         // Outputs tool tags for both the landing section and projects
         let usedToolsArray = [];
         if (!usedTools) {
-            // usedToolsArray = [
-            //     {name: 'HTML5'},
-            //     {name: 'CSS3'},
-            //     {name: 'SASS'},
-            //     {name: 'Bootstrap'},
-            //     {name: 'Tailwind'},
-            //     {name: 'JavaScript'},
-            //     {name: 'React'},
-            //     {name: 'jQuery'},
-            //     {name: 'WordPress'},
-            //     {name: 'PHP'},
-            //     {name: 'MySQL'},
-            //     {name: 'GitHub'},
-            //     {name: 'Linux'},
-            // ];
             usedToolsArray = port.tools;
         } else {
             usedToolsArray = usedTools;
@@ -331,6 +316,7 @@ const port = {
             });
         };
     },
+    projectGalleryArray: [],
     outputContentProject: async function() {
         // Outputs HTML for individual projects
         this.target.innerHTML = '';
@@ -412,14 +398,22 @@ const port = {
                 </section>
                 <section id="project-gallery">
                 <ul>`;
-            let galleryImages = port.jsonData.acf.proj_images;
-            for (let galleryImage of galleryImages) {
-                let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
-                let capturedImageObj = arrayOfImageObjs.find(o => o.id === galleryImage);
+            // let galleryImages = port.jsonData.acf.proj_images;
+            // for (let galleryImage of galleryImages) {
+            //     let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
+            //     let capturedImageObj = arrayOfImageObjs.find(o => o.id === galleryImage);
+            //     this.contentHTML += `
+            //         <li>
+            //             <img class="modable" src="${capturedImageObj.media_details.sizes.medium.source_url}" alt="${capturedImageObj.alt_text}">
+            //         </li>`;
+            // };
+            this.projectGalleryArray = this.jsonData['_embedded']['acf:attachment'];
+            for (let i = 0; i < this.projectGalleryArray.length; i++) {
                 this.contentHTML += `
                     <li>
-                        <img class="modable" src="${capturedImageObj.media_details.sizes.full.source_url}" alt="${capturedImageObj.alt_text}">
-                    </li>`;
+                        <img class="modable" src="${this.projectGalleryArray[i].media_details.sizes.medium.source_url}" alt="${this.projectGalleryArray[i].alt_text}" data-index="${i}"/>
+                    </li>
+                `;
             };
             this.contentHTML += `
                 </ul>
@@ -428,7 +422,7 @@ const port = {
             this.contentHTML += this.linkedinLink;
             this.contentHTML += this.githubLink;
             this.contentHTML += `</section>`;
-            this.contentHTML += this.imageModal;
+            // this.contentHTML += this.imageModal;
             loading.style.display = 'none';
             this.target.innerHTML = this.contentHTML;
             this.accordListeners();
@@ -464,32 +458,58 @@ const port = {
             });
         };
     },
+    projectGalleryIndex: null,
     modalListeners: function() {
         // Functionality for image modals
         let modal = document.getElementById('image-modal');
-        let modalWrapper = document.getElementById('modal-inner-wrapper');
-        let modalPartImage = document.getElementById('modal-img');
-        let modalPartCaption = document.getElementById('modal-alt');
+        let prevButton = document.getElementById('prev-img');
+        let nextButton = document.getElementById('next-img');
+        // let modalWrapper = document.getElementById('modal-inner-wrapper');
+        // let modalPartImage = document.getElementById('modal-img');
+        // let modalPartCaption = document.getElementById('modal-alt');
         let modableImages = document.getElementsByClassName('modable');
         for (let i = 0; i < modableImages.length; i++) {
             modableImages[i].addEventListener('click', function(event) {
+                port.projectGalleryIndex = event.target.dataset.index;
                 modal.style.display = 'block';
-                modalPartImage.src = event.target.src;
-                modalPartCaption.innerHTML = event.target.alt;
+                // modalPartImage.src = event.target.src;
+                // modalPartCaption.innerHTML = event.target.alt;
+                port.modalImageLoader();
                 setTimeout(function() {
                     modal.style.opacity = '100%';
                 }, 10);
             });
         };
-        modal.addEventListener('click', function() {
-            modal.style.opacity = '0%';
-            setTimeout(function() {
-                modal.style.display = 'none';
-            }, 300);
+        // modal.addEventListener('click', function() {
+        //     modal.style.opacity = '0%';
+        //     setTimeout(function() {
+        //         modal.style.display = 'none';
+        //     }, 300);
+        // });
+        prevButton.addEventListener('click', function() {
+            port.projectGalleryIndex--;
+            if (port.projectGalleryIndex === -1) {
+                port.projectGalleryIndex = port.projectGalleryArray.length - 1;
+            };
+            port.modalImageLoader();
         });
-        modalWrapper.addEventListener('click', function(event) {
-            event.stopPropagation();
+        nextButton.addEventListener('click', function() {
+            port.projectGalleryIndex++;
+            if (port.projectGalleryIndex === port.projectGalleryArray.length) {
+                port.projectGalleryIndex = 0;
+            };
+            port.modalImageLoader();
         });
+        // modalWrapper.addEventListener('click', function(event) {
+        //     event.stopPropagation();
+        // });
+    },
+    modalImageLoader: function() {
+        let modalPartImage = document.getElementById('modal-img');
+        let modalPartCaption = document.getElementById('modal-alt');
+        modalPartImage.src = port.projectGalleryArray[port.projectGalleryIndex].media_details.sizes['1536x1536'].source_url;
+        modalPartImage.alt = port.projectGalleryArray[port.projectGalleryIndex].alt_text;
+        modalPartCaption.innerHTML = port.projectGalleryArray[port.projectGalleryIndex].alt_text;
     },
 };
 
