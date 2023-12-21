@@ -190,7 +190,7 @@ const port = {
                 // Grabs Project URL from project link button, then plugs it into the API URL template to grab the project JSON data from WordPress
                 this.jsonURLProject = `https://casims.ca/csport/wp-json/wp/v2/csp-project/${capturedID}?_embed`;
                 scroll(0,0);
-                this.outputContentProject();
+                this.outputContentSingleProject();
                 this.onSite = false;
             }
         } else {
@@ -229,8 +229,12 @@ const port = {
             </section>
             <section id="projects">
                 <h2>Projects</h2>`;
-        this.contentHTML += `<div id="projects-container">`;
-        this.outputContentMainProjects();
+        this.contentHTML += `<div class="featured-projects-container">`;
+        this.outputContentFeaturedProjects();
+        this.contentHTML += `
+                </div>
+                <div class="projects-container">`;
+        this.outputContentProjects();
         this.contentHTML += `
                 </div>
             </section>`;
@@ -262,27 +266,52 @@ const port = {
         };
         this.contentHTML += `</ul>`;
     },
-    outputContentMainProjects: function() {
+    outputContentFeaturedProjects: function() {
         // Outputs project cards for main page
         for (let project of port.jsonData) {
-            this.contentHTML += `
-                <article class="project-card">
-                    <a href="#${project.id}" class="card-standard-link">
-                        <img src="${project['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${project['_embedded']['wp:featuredmedia'][0].alt_text}">
-                    </a>
-                    <div class="card-text-container">
+            if (project.acf.proj_featured === true) {
+                this.contentHTML += `
+                    <article class="featured-project-card">
                         <a href="#${project.id}" class="card-standard-link">
-                            <h3 tabindex="0">${project.title.rendered}</h3>
+                            <img src="${project['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${project['_embedded']['wp:featuredmedia'][0].alt_text}">
                         </a>
+                        <div class="card-text-container">
+                            <a href="#${project.id}" class="card-standard-link">
+                                <h3 tabindex="0">${project.title.rendered}</h3>
+                            </a>
+                            <a href="#${project.id}" class="card-standard-link">
+                                <h4 tabindex="0">${project.acf.proj_sub_title}</h4>
+                            </a>
+                            <p>${project.acf.proj_date}</p>
+                            <p>${project.acf.proj_overview}</p>`;
+                this.outputContentTools(project['_embedded']['wp:term'][0]);
+                this.contentHTML += `
+                        </div>
+                            <a href="#${project.id}" class="card-proj-link">Project Details</a>
+                    </article>`;
+            };
+        };
+    },
+    outputContentProjects: function() {
+        for (let project of port.jsonData) {
+            if (project.acf.proj_featured === false) {
+                this.contentHTML += `
+                    <article class "project-card">
                         <a href="#${project.id}" class="card-standard-link">
-                            <h4 tabindex="0">${project.acf.proj_sub_title}</h4>
-                        </a>`;
-            this.outputContentTools(project['_embedded']['wp:term'][0]);
-            this.contentHTML += `
-                        <p>${project.acf.proj_overview}</p>
-                    </div>
+                            <img src="${project['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${project['_embedded']['wp:featuredmedia'][0].alt_text}">
+                        </a>
+                        <div class="card-text-container">
+                            <a href="#${project.id}" class="card-standard-link">
+                                <h3 tabindex="0">${project.title.rendered}</h3>
+                            </a>
+                            <p>${project.acf.proj_overview}</p>`;
+                            this.outputContentTools(project['_embedded']['wp:term'][0]);
+                            this.contentHTML += `
+                        </div>
                         <a href="#${project.id}" class="card-proj-link">Project Details</a>
-                </article>`;
+                    </article>
+                `;
+            };
         };
     },
     navMenuListeners: function() {
@@ -317,7 +346,7 @@ const port = {
         };
     },
     projectGalleryArray: [],
-    outputContentProject: async function() {
+    outputContentSingleProject: async function() {
         // Outputs HTML for individual projects
         this.target.innerHTML = '';
         loading.style.display = 'block';
