@@ -1,5 +1,4 @@
 /* FONT IMPORTS */
-
 @font-face {
     font-family: 'roboto_monoregular';
     src: url('../fonts/robotomono-variablefont_wght-webfont.woff2') format('woff2'),
@@ -17,12 +16,29 @@
 }
 
 
-/* COLORS */
-
+/* VARIABLES / PALETTE */
 :root {
     --casDark: #12120f;
     --casLight: #bec5bb;
     --casRed: rgb(118, 18, 15);
     --casGreen: rgb(18, 118, 15);
     --casBlue: rgb(18, 18, 115);
+}
+
+/* COLOURS */
+body {
+    background-color: var(--casDark);
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+    color: var(--casLight);
+}
+
+svg path {
+    fill: var(--casLight);
+}
+
+#logo path {
+    fill: none;
+    stroke: var(--casLight);
 }
