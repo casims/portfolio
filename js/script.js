@@ -3,7 +3,7 @@
 const port = {
     target: document.querySelector('main#main'),
     loading: document.getElementById('loading'),
-    jsonURLMain:'https://casims.ca/csport/wp-json/wp/v2/csp-project?_embed',
+    jsonURLMain:'https://casims.ca/csport/wp-json/wp/v2/csp-project??acf_format=standard&_embed',
     jsonURLProject: null,
     onSite: null,
     contentHTML: '',
@@ -188,7 +188,7 @@ const port = {
                 this.onSite = true;
             } else {
                 // Grabs Project URL from project link button, then plugs it into the API URL template to grab the project JSON data from WordPress
-                this.jsonURLProject = `https://casims.ca/csport/wp-json/wp/v2/csp-project/${capturedID}?_embed`;
+                this.jsonURLProject = `https://casims.ca/csport/wp-json/wp/v2/csp-project/${capturedID}?acf_format=standard&_embed`;
                 scroll(0,0);
                 this.outputContentSingleProject();
                 this.onSite = false;
@@ -245,7 +245,7 @@ const port = {
         // this.contentHTML += this.imageModal;
         loading.style.display = 'none';
         this.target.innerHTML = this.contentHTML;
-        this.navMenuListeners();
+        // this.navMenuListeners();
     },
     outputContentTools: function(usedTools) {
         // Outputs tool tags for both the landing section and projects
@@ -314,20 +314,20 @@ const port = {
             };
         };
     },
-    navMenuListeners: function() {
-        // Makes nav buttons on main page change color on hover
-        let navButtons = document.getElementsByClassName('nav-button');
-        for (let i = 0; i < navButtons.length; i++) {
-            navButtons[i].addEventListener('mouseover', function(event) {
-                event.target.children[0].style.fill = 'var(--tuskWhite)';
-                event.target.style.borderColor = 'var(--tuskWhite)';
-            });
-            navButtons[i].addEventListener('mouseleave', function(event) {
-                event.target.children[0].style.fill = '';
-                event.target.style.borderColor = '';
-            });
-        };
-    },
+    // navMenuListeners: function() {
+    //     // Makes nav buttons on main page change color on hover
+    //     let navButtons = document.getElementsByClassName('nav-button');
+    //     for (let i = 0; i < navButtons.length; i++) {
+    //         navButtons[i].addEventListener('mouseover', function(event) {
+    //             event.target.children[0].style.fill = 'var(--tuskWhite)';
+    //             event.target.style.borderColor = 'var(--tuskWhite)';
+    //         });
+    //         navButtons[i].addEventListener('mouseleave', function(event) {
+    //             event.target.children[0].style.fill = '';
+    //             event.target.style.borderColor = '';
+    //         });
+    //     };
+    // },
     toolkitListeners: function() {
         // Displays name of language on hover of language icons
         let toolOutput = document.getElementById('tool-output-text');
@@ -395,11 +395,11 @@ const port = {
                             ${this.arrowSVG}
                             <p>${section.proj_sect_gen_text}</p>`;
                         if (section.proj_sect_gen_image) {
-                            let imageID = section.proj_sect_gen_image;
-                            let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
-                            let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
+                            // let imageID = section.proj_sect_gen_image;
+                            // let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
+                            // let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
                             this.contentHTML += `
-                            <img src="${capturedImageObj.media_details.sizes.medium_large.source_url}" alt="${capturedImageObj.alt_text}">`;
+                            <img src="${section.proj_sect_gen_image.sizes.large}" alt="${section.proj_sect_gen_image.alt}">`;
                         }
                 };
                 this.contentHTML += `</section>`;
@@ -411,16 +411,17 @@ const port = {
                     <p>${port.jsonData.acf.proj_features_intro}</p>`;
             let features = port.jsonData.acf.proj_features_gen;
             for (let feature of features) {
+                console.log(feature);
                 this.contentHTML += `
                     <h4 tabindex="0">${feature.proj_feat_gen_heading}</h4>
                     <p>${feature.proj_feat_gen_text}</p>
                     ${feature.proj_feat_gen_code}`;
                 if (feature.proj_feat_gen_image) {
-                    let imageID = feature.proj_feat_gen_image;
-                    let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
-                    let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
+                    // let imageID = feature.proj_feat_gen_image;
+                    // let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
+                    // let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
                     this.contentHTML += `
-                        <img src="${capturedImageObj.source_url}" alt="${capturedImageObj.alt_text}">`;
+                        <img src="${feature.proj_feat_gen_image.sizes.large}" alt="${feature.proj_feat_gen_image.alt}">`;
                 };
             };
             this.contentHTML += `
@@ -436,11 +437,11 @@ const port = {
             //             <img class="modable" src="${capturedImageObj.media_details.sizes.medium.source_url}" alt="${capturedImageObj.alt_text}">
             //         </li>`;
             // };
-            this.projectGalleryArray = this.jsonData['_embedded']['acf:attachment'];
+            this.projectGalleryArray = this.jsonData.acf.proj_images;
             for (let i = 0; i < this.projectGalleryArray.length; i++) {
                 this.contentHTML += `
                     <li>
-                        <img class="modable" src="${this.projectGalleryArray[i].media_details.sizes.medium.source_url}" alt="${this.projectGalleryArray[i].alt_text}" data-index="${i}"/>
+                        <img class="modable" src="${this.projectGalleryArray[i].sizes.medium}" alt="${this.projectGalleryArray[i].alt}" data-index="${i}"/>
                     </li>
                 `;
             };
@@ -536,9 +537,9 @@ const port = {
     modalImageLoader: function() {
         let modalPartImage = document.getElementById('modal-img');
         let modalPartCaption = document.getElementById('modal-alt');
-        modalPartImage.src = port.projectGalleryArray[port.projectGalleryIndex].media_details.sizes['1536x1536'].source_url;
-        modalPartImage.alt = port.projectGalleryArray[port.projectGalleryIndex].alt_text;
-        modalPartCaption.innerHTML = port.projectGalleryArray[port.projectGalleryIndex].alt_text;
+        modalPartImage.src = port.projectGalleryArray[port.projectGalleryIndex].sizes['1536x1536'];
+        modalPartImage.alt = port.projectGalleryArray[port.projectGalleryIndex].alt;
+        modalPartCaption.innerHTML = port.projectGalleryArray[port.projectGalleryIndex].alt;
     },
 };
 
