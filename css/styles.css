@@ -19,6 +19,7 @@
 /* VARIABLES / PALETTE */
 :root {
     --casDark: #12120f;
+    --casDarkTrans: rgba(18, 18, 15, 0.9);
     --casLight: #bec5bb;
     --casRed: rgb(118, 18, 15);
     --casGreen: rgb(18, 118, 15);
@@ -27,7 +28,12 @@
 
 /* COLOURS */
 body {
-    background-color: var(--casDark);
+    background-color: var(--casDarkTrans);
+}
+
+.card {
+    background-color: var(--casDarkTrans);
+    border: 1px black solid;
 }
 
 h1, h2, h3, h4, h5, h6, p, a {
@@ -41,4 +47,42 @@ svg path {
 #logo path {
     fill: none;
     stroke: var(--casLight);
+}
+
+/* TYPOGRAPHY */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'roboto_monoregular', monospace;
+}
+
+h1>span {
+    text-transform: lowercase;
+}
+
+span.hide {
+    display: inline-block;
+}
+
+p, a {
+    font-family: 'ibm_plex_sansregular', sans-serif;
+}
+
+/* LAYOUT */
+main {
+    margin: 1rem;
+}
+
+h1 {
+    text-align: center;
+    margin: .5rem;
+}
+
+/* NAV */
+nav {
+    display: none;
+}
+
+/* CARDS */
+.card {
+    padding: 1.5rem .75rem;
+    border-radius: 0.5rem;
 }

@@ -214,10 +214,10 @@ const port = {
             <section id="landing">
                 <div class="card landing">
                     <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 670 506">
-                        <path fill="none" stroke="#000" stroke-width="52" d="M208 28c-99.41 0-180 80.59-180 180s80.59 180 180 180m0-270c-49.71 0-90 40.29-90 90s40.29 90 90 90m299-90c74.56 0 135 60.44 135 135s-60.44 135-135 135m-299.5-90h300M28 478h479.5m-300-450H642m-434.5 90H642m-404.5 90h270m-300 90h300"/>
+                        <path stroke-width="52" d="M208 28c-99.41 0-180 80.59-180 180s80.59 180 180 180m0-270c-49.71 0-90 40.29-90 90s40.29 90 90 90m299-90c74.56 0 135 60.44 135 135s-60.44 135-135 135m-299.5-90h300M28 478h479.5m-300-450H642m-434.5 90H642m-404.5 90h270m-300 90h300"/>
                     </svg>
                     <div class="text-container">
-                        <h1 id="main-title">Connor Sims</h1>
+                        <h1 id="main-title"><span>Connor</span><span class="hide"> </span>Sims</h1>
                         <p>Front-End Web Developer with a passion for problem solving and working with JavaScript.</p>
                         <a href="mailto:connor@casims.ca" class="email-copy">connor@casims.ca</a>
                         ${this.linkedinLink}
@@ -272,7 +272,7 @@ const port = {
         for (let project of port.jsonData) {
             if (project.acf.proj_featured === true) {
                 this.contentHTML += `
-                    <article class="featured-project-card">
+                    <article class="featured-project card">
                         <a href="#${project.id}" class="card-standard-link">
                             <img src="${project['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${project['_embedded']['wp:featuredmedia'][0].alt_text}">
                         </a>
@@ -297,7 +297,7 @@ const port = {
         for (let project of port.jsonData) {
             if (project.acf.proj_featured === false) {
                 this.contentHTML += `
-                    <article class "project-card">
+                    <article class="project card">
                         <a href="#${project.id}" class="card-standard-link">
                             <img src="${project['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${project['_embedded']['wp:featuredmedia'][0].alt_text}">
                         </a>
