@@ -20,9 +20,19 @@
     --casDark: #12120f;
     --casDarkTrans: rgba(18, 18, 15, 0.9);
     --casLight: #bec5bb;
-    --casRed: rgb(118, 18, 15);
-    --casGreen: rgb(18, 118, 15);
-    --casBlue: rgb(18, 18, 115);
+    --tagHTML5: #e54c21;
+    --tagCSS3: #214ce5;
+    --tagSASS: #cf649a;
+    --tagBootstrap: #4c0bce;
+    --tagTailwind: #38bdf8;
+    --tagJavaScript: #f7df1e;
+    --tagReact: #61dbfb;
+    --tagjQuery: #1169ae;
+    --tagWordPress: #1b769c;
+    --tagPHP: #787cb4;
+    --tagMySQL: #e48e01;
+    --tagGitHub: #8462ff;
+    --tagLinux: #f5be04;
 }
 
 /* COLOURS */
@@ -49,7 +59,7 @@ svg path {
 }
 
 /* TYPOGRAPHY */
-h1, h2, h3, h4, h5, h6, a {
+h1, h2, h3, h4, h5, h6, a, li p {
     font-family: 'roboto_monoregular', monospace;
 }
 
@@ -68,7 +78,6 @@ a {
 
 p {
     font-family: 'ibm_plex_sansregular', sans-serif;
-    margin: .5rem 0;
 }
 
 /* LAYOUT */
@@ -79,6 +88,10 @@ main {
 h1 {
     margin: .5rem;
     text-align: center;
+}
+
+p {
+    margin: .5rem 0;
 }
 
 /* NAV */
@@ -93,30 +106,30 @@ nav {
 }
 
 /* LINKS / BUTTONS */
-a.button {
+a.button, a.social-link, button.copy-clipboard {
     background-color: var(--casLight);
     color: var(--casDark);
     border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+}
+
+a.button {
     padding: 0.5rem 1rem;
 }
 
 .button.email {
-    flex-grow: 1;
     margin-right: .5rem;
     text-align: center;
 }
 
-button.copy-clipboard {
+button.copy-clipboard, a.social-link {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--casLight);
-    border: none;
-    border-radius: 0.25rem;
     width: 2.15rem;
     height: 2.15rem;
     padding: 0;
-    cursor: pointer;
 }
 
 button.copy-clipboard svg {
@@ -124,20 +137,8 @@ button.copy-clipboard svg {
     height: .75rem;
 }
 
-button.copy-clipboard svg path {
-    fill: var(--casDark);
-}
-
 a.social-link {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--casLight);
-    color: var(--casDark);
-    margin-left: 0.5rem;
-    border-radius: 0.25rem;
-    width: 2.15rem;
-    height: 2.15rem;
+    margin: 0 0.25rem;
 }
 
 a.social-link svg {
@@ -145,20 +146,211 @@ a.social-link svg {
     height: 1.25rem;
 }
 
-a.social-link svg path {
+button.copy-clipboard svg path, a.social-link svg path {
     fill: var(--casDark);
+}
+
+/* CONTACT PART */
+.contact-container {
+    margin: 0 auto;
+    width: 14.5rem;
+}
+
+.email-container {
+    display: flex;
+}
+
+.social-link-container {
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* TOOL TAGS */
+ul.tool-tags {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+li.tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 8rem;
+    height: 2.15rem;
+    padding: 0 0.15rem;
+    border: 2px var(--casLight) solid;
+    border-radius: 0.25rem;
+}
+
+li.tag, li.tag * {
+    transition: 0.3s all ease;
+}
+
+li.tag p {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 0.8rem;
+    cursor: default;
+    background-color: transparent !important;
+}
+
+li.tag svg {
+    width: 1.75rem;
+    height: 1.5rem;
+    background-color: transparent !important;
+}
+
+li.tag:hover * {
+    color: var(--casDark);
+    fill: var(--casDark);
+}
+
+li.tag.front-end, li.tag.sub-front-end {
+    grid-column: 1 / 2;
+    justify-self: end;
+}
+
+li.tag.js, li.tag.backend, li.tag.misc {
+    grid-column: 2 / 3;
+    justify-items: start;
+}
+
+.tag.html5, .tag.html5 * {
+    border-color: var(--tagHTML5);
+    color: var(--tagHTML5);
+    fill: var(--tagHTML5);
+}
+
+.tag.html5:hover, .tag.html5:hover * {
+    background-color: var(--tagHTML5);
+}
+
+.tag.css3, .tag.css3 * {
+    border-color: var(--tagCSS3);
+    color: var(--tagCSS3);
+    fill: var(--tagCSS3);
+}
+
+.tag.css3:hover, .tag.css3:hover * {
+    background-color: var(--tagCSS3);
+}
+
+.tag.sass, .tag.sass * {
+    border-color: var(--tagSASS);
+    color: var(--tagSASS);
+    fill: var(--tagSASS);
+}
+
+.tag.sass:hover, .tag.sass:hover * {
+    background-color: var(--tagSASS);
+}
+
+.tag.bootstrap, .tag.bootstrap * {
+    border-color: var(--tagBootstrap);
+    color: var(--tagBootstrap);
+    fill: var(--tagBootstrap);
+}
+
+.tag.bootstrap:hover, .tag.bootstrap:hover * {
+    background-color: var(--tagBootstrap);
+}
+
+.tag.tailwind, .tag.tailwind * {
+    border-color: var(--tagTailwind);
+    color: var(--tagTailwind);
+    fill: var(--tagTailwind);
+}
+
+.tag.tailwind:hover, .tag.tailwind:hover * {
+    background-color: var(--tagTailwind);
+}
+
+.tag.javascript, .tag.javascript * {
+    border-color: var(--tagJavaScript);
+    color: var(--tagJavaScript);
+    fill: var(--tagJavaScript);
+}
+
+.tag.javascript:hover, .tag.javascript:hover * {
+    background-color: var(--tagJavaScript);
+}
+
+.tag.react, .tag.react * {
+    border-color: var(--tagReact);
+    color: var(--tagReact);
+    fill: var(--tagReact);
+}
+
+.tag.react:hover, .tag.react:hover * {
+    background-color: var(--tagReact);
+}
+
+.tag.jquery, .tag.jquery * {
+    border-color: var(--tagjQuery);
+    color: var(--tagjQuery);
+    fill: var(--tagjQuery);
+}
+
+.tag.jquery:hover, .tag.jquery:hover * {
+    background-color: var(--tagjQuery);
+}
+
+.tag.wordpress, .tag.wordpress * {
+    border-color: var(--tagWordPress);
+    color: var(--tagWordPress);
+    fill: var(--tagWordPress);
+}
+
+.tag.wordpress:hover, .tag.wordpress:hover * {
+    background-color: var(--tagWordPress);
+}
+
+.tag.php, .tag.php * {
+    border-color: var(--tagPHP);
+    color: var(--tagPHP);
+    fill: var(--tagPHP);
+}
+
+.tag.php:hover, .tag.php:hover * {
+    background-color: var(--tagPHP);
+}
+
+.tag.mysql, .tag.mysql * {
+    border-color: var(--tagMySQL);
+    color: var(--tagMySQL);
+    fill: var(--tagMySQL);
+}
+
+.tag.mysql:hover, .tag.mysql:hover * {
+    background-color: var(--tagMySQL);
+}
+
+.tag.github, .tag.github * {
+    border-color: var(--tagGitHub);
+    color: var(--tagGitHub);
+    fill: var(--tagGitHub);
+}
+
+.tag.github:hover, .tag.github:hover * {
+    background-color: var(--tagGitHub);
+}
+
+.tag.linux, .tag.linux * {
+    border-color: var(--tagLinux);
+    color: var(--tagLinux);
+    fill: var(--tagLinux);
+}
+
+.tag.linux:hover, .tag.linux:hover * {
+    background-color: var(--tagLinux);
 }
 
 /* LANDING SECTION */
 .card.landing .text-container p {
     margin-bottom: 1.2rem;
-}
-
-.card.landing .text-container .email-container {
-    display: flex;
-}
-
-.social-link-container {
-    text-align: end;
-    margin-top: 0.5rem;
+    text-align: center;
 }
