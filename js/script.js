@@ -236,7 +236,7 @@ const port = {
                 </div>
             </section>
             <section id="projects">
-                <h2>Projects</h2>`;
+                <h2 class="card">Projects</h2>`;
         this.contentHTML += `<div class="featured-projects-container">`;
         this.outputContentFeaturedProjects();
         this.contentHTML += `
@@ -245,11 +245,18 @@ const port = {
         this.outputContentProjects();
         this.contentHTML += `
                 </div>
+            </section>
+            <section id="contact">
+                <h2 class="card">Contact</h2>
+                <div class="contact card">
+                    <p>If you want to work with me on something, let me know!  I pride myself on a clean inbox.</p>
+                    ${this.contactContentPart}
+                </div>
             </section>`;
-        this.contentHTML += this.contentContactSection;
-        this.contentHTML += this.linkedinLink;
-        this.contentHTML += this.githubLink;
-        this.contentHTML += `</section>`;
+        // this.contentHTML += this.contentContactSection;
+        // this.contentHTML += this.linkedinLink;
+        // this.contentHTML += this.githubLink;
+        // this.contentHTML += `</section>`;
         // this.contentHTML += this.imageModal;
         loading.style.display = 'none';
         this.target.innerHTML = this.contentHTML;
@@ -291,12 +298,19 @@ const port = {
                             <a href="#${project.id}" class="card-standard-link">
                                 <h4 tabindex="0">${project.acf.proj_sub_title}</h4>
                             </a>
-                            <p>${project.acf.proj_date}</p>
-                            <p>${project.acf.proj_overview}</p>`;
+                            <p class="proj-date">${project.acf.proj_date}</p>
+                            <p class="proj-overview">${project.acf.proj_overview}</p>`;
                 this.outputContentTools(project['_embedded']['wp:term'][0]);
                 this.contentHTML += `
                         </div>
-                            <a href="#${project.id}" class="button proj-link">Project Details</a>
+                        <div class="proj-link-wrapper">
+                            <a href="#${project.id}" class="button proj-link">
+                                Project Details
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
+                                </svg>
+                            </a>
+                        </div>
                     </article>`;
             };
         };
@@ -317,7 +331,14 @@ const port = {
                             this.outputContentTools(project['_embedded']['wp:term'][0]);
                             this.contentHTML += `
                         </div>
-                        <a href="#${project.id}" class="button proj-link">Project Details</a>
+                        <div class="proj-link-wrapper">
+                            <a href="#${project.id}" class="button proj-link">
+                                Project Details
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
+                                </svg>
+                            </a>
+                        </div>
                     </article>
                 `;
             };

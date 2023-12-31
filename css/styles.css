@@ -81,17 +81,28 @@ p {
 }
 
 /* LAYOUT */
+#image-modal {
+    display: none;
+}
+
 main {
     margin: 1rem;
 }
 
-h1 {
-    margin: .5rem;
-    text-align: center;
+section {
+    margin: 3.5rem 0 7rem;
+}
+
+h2 {
+    display: inline-block;
 }
 
 p {
     margin: .5rem 0;
+}
+
+img {
+    border-radius: 0.25rem;
 }
 
 /* NAV */
@@ -102,7 +113,11 @@ nav {
 /* CARDS */
 .card {
     border-radius: 0.5rem;
-    padding: 1.5rem .75rem;
+    padding: 0.75rem 0.75rem;
+}
+
+h3, h4 {
+    margin: 0.5rem 0;
 }
 
 /* LINKS / BUTTONS */
@@ -285,7 +300,83 @@ li.tag.js, li.tag.backend, li.tag.misc {
 }
 
 /* LANDING SECTION */
+#landing {
+    margin-top: 0;
+    min-height: 100vh;
+}
+
+.card.landing {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+    padding-top: 1.5rem;
+}
+
+h1 {
+    margin: .5rem 0;
+    text-align: center;
+}
+
 .card.landing .text-container p {
     margin-bottom: 1.2rem;
     text-align: center;
+}
+
+/* PROJECTS SECTION */
+.project.card, .featured-project.card {
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+img {
+    margin-bottom: 0.5rem;
+}
+
+.proj-date {
+    text-align: end;
+    font-size: 0.9rem;
+}
+
+.proj-date, .proj-overview {
+    margin: 0.5rem 0 1rem;
+}
+
+.proj-link-wrapper {
+    text-align: end;
+}
+
+a.button.proj-link {
+    display: inline-flex;
+    align-items: center;
+    text-align: end;
+    padding: 0.5rem 0.6rem 0.5rem 1rem;
+    margin: 0 0 0 auto;
+}
+
+.proj-link svg {
+    margin-left: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.proj-link svg path {
+    fill: var(--casDark);
+}
+
+/* CONTACT SECTION */
+.contact.card p {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.contact.card {
+    padding-bottom: 1.5rem;
+}
+
+/* FOOTER */ 
+footer p.card {
+    display: inline;
+    margin: 0.5rem;
+    border-radius: 0.5rem 0.5rem 0 0;
 }
