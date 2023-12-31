@@ -219,133 +219,68 @@ li.tag.js, li.tag.backend, li.tag.misc {
     justify-items: start;
 }
 
-.tag.html5, .tag.html5 * {
-    border-color: var(--tagHTML5);
-    color: var(--tagHTML5);
-    fill: var(--tagHTML5);
-}
-
 .tag.html5:hover, .tag.html5:hover * {
+    border-color: var(--tagHTML5);
     background-color: var(--tagHTML5);
 }
 
-.tag.css3, .tag.css3 * {
-    border-color: var(--tagCSS3);
-    color: var(--tagCSS3);
-    fill: var(--tagCSS3);
-}
-
 .tag.css3:hover, .tag.css3:hover * {
+    border-color: var(--tagCSS3);
     background-color: var(--tagCSS3);
 }
 
-.tag.sass, .tag.sass * {
-    border-color: var(--tagSASS);
-    color: var(--tagSASS);
-    fill: var(--tagSASS);
-}
-
 .tag.sass:hover, .tag.sass:hover * {
+    border-color: var(--tagSASS);
     background-color: var(--tagSASS);
 }
 
-.tag.bootstrap, .tag.bootstrap * {
-    border-color: var(--tagBootstrap);
-    color: var(--tagBootstrap);
-    fill: var(--tagBootstrap);
-}
-
 .tag.bootstrap:hover, .tag.bootstrap:hover * {
+    border-color: var(--tagBootstrap);
     background-color: var(--tagBootstrap);
 }
 
-.tag.tailwind, .tag.tailwind * {
-    border-color: var(--tagTailwind);
-    color: var(--tagTailwind);
-    fill: var(--tagTailwind);
-}
-
 .tag.tailwind:hover, .tag.tailwind:hover * {
+    border-color: var(--tagTailwind);
     background-color: var(--tagTailwind);
 }
 
-.tag.javascript, .tag.javascript * {
-    border-color: var(--tagJavaScript);
-    color: var(--tagJavaScript);
-    fill: var(--tagJavaScript);
-}
-
 .tag.javascript:hover, .tag.javascript:hover * {
+    border-color: var(--tagJavaScript);
     background-color: var(--tagJavaScript);
 }
 
-.tag.react, .tag.react * {
-    border-color: var(--tagReact);
-    color: var(--tagReact);
-    fill: var(--tagReact);
-}
-
 .tag.react:hover, .tag.react:hover * {
+    border-color: var(--tagReact);
     background-color: var(--tagReact);
 }
 
-.tag.jquery, .tag.jquery * {
-    border-color: var(--tagjQuery);
-    color: var(--tagjQuery);
-    fill: var(--tagjQuery);
-}
-
 .tag.jquery:hover, .tag.jquery:hover * {
+    border-color: var(--tagjQuery);
     background-color: var(--tagjQuery);
 }
 
-.tag.wordpress, .tag.wordpress * {
-    border-color: var(--tagWordPress);
-    color: var(--tagWordPress);
-    fill: var(--tagWordPress);
-}
-
 .tag.wordpress:hover, .tag.wordpress:hover * {
+    border-color: var(--tagWordPress);
     background-color: var(--tagWordPress);
 }
 
-.tag.php, .tag.php * {
-    border-color: var(--tagPHP);
-    color: var(--tagPHP);
-    fill: var(--tagPHP);
-}
-
 .tag.php:hover, .tag.php:hover * {
+    border-color: var(--tagPHP);
     background-color: var(--tagPHP);
 }
 
-.tag.mysql, .tag.mysql * {
-    border-color: var(--tagMySQL);
-    color: var(--tagMySQL);
-    fill: var(--tagMySQL);
-}
-
 .tag.mysql:hover, .tag.mysql:hover * {
+    border-color: var(--tagMySQL);
     background-color: var(--tagMySQL);
 }
 
-.tag.github, .tag.github * {
-    border-color: var(--tagGitHub);
-    color: var(--tagGitHub);
-    fill: var(--tagGitHub);
-}
-
 .tag.github:hover, .tag.github:hover * {
+    border-color: var(--tagGitHub);
     background-color: var(--tagGitHub);
 }
 
-.tag.linux, .tag.linux * {
-    border-color: var(--tagLinux);
-    color: var(--tagLinux);
-    fill: var(--tagLinux);
-}
-
 .tag.linux:hover, .tag.linux:hover * {
+    border-color: var(--tagLinux);
     background-color: var(--tagLinux);
 }
 
