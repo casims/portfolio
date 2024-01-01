@@ -236,7 +236,9 @@ const port = {
                 </div>
             </section>
             <section id="projects">
-                <h2 class="card">Projects</h2>`;
+                <div class="card header">
+                    <h2>Projects</h2>
+                </div>`;
         this.contentHTML += `<div class="featured-projects-container">`;
         this.outputContentFeaturedProjects();
         this.contentHTML += `
@@ -247,7 +249,9 @@ const port = {
                 </div>
             </section>
             <section id="contact">
-                <h2 class="card">Contact</h2>
+                <div class="card header">
+                    <h2>Contact</h2>
+                </div>
                 <div class="contact card">
                     <p>If you want to work with me on something, let me know!  I pride myself on a clean inbox.</p>
                     ${this.contactContentPart}
@@ -388,7 +392,7 @@ const port = {
                         <a id="back-button" href="">Back</a>
                     </div>
                 </nav>
-                <h1>404 Error</h1>
+                <h2>404 Error</h2>
                 <p>Page not found.</p>`;
             this.target.innerHTML = this.contentHTML;
         } else {
@@ -400,15 +404,19 @@ const port = {
                     </div>
                 </nav>
                 <section id="project-header-section">
-                    <h1 tabindex="0">${port.jsonData.title.rendered}</h1>
-                    <img src="${port.jsonData['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${port.jsonData['_embedded']['wp:featuredmedia'][0].alt_text}">
-                    <div class="proj-text-container">
+                    <div class="card header">
                         <h2 tabindex="0">${port.jsonData.acf.proj_sub_title}</h2>
-                        <p>${port.jsonData.acf.proj_overview}</p>`;
-                this.outputContentTools(port.jsonData['_embedded']['wp:term'][0])
-                this.contentHTML += `
-                        <a href="${port.jsonData.acf.proj_live_link}" target="_blank">Live Site</a>
-                        <a href="${port.jsonData.acf.proj_github_link}" target="_blank">GitHub Repo</a>
+                    </div>
+                    <div class="card">
+                        <img src="${port.jsonData['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${port.jsonData['_embedded']['wp:featuredmedia'][0].alt_text}">
+                        <div class="proj-text-container">
+                            <h3 tabindex="0">${port.jsonData.title.rendered}</h3>
+                            <p>${port.jsonData.acf.proj_overview}</p>`;
+            this.outputContentTools(port.jsonData['_embedded']['wp:term'][0])
+            this.contentHTML += `
+                            <a href="${port.jsonData.acf.proj_live_link}" target="_blank">Live Site</a>
+                            <a href="${port.jsonData.acf.proj_github_link}" target="_blank">GitHub Repo</a>
+                        </div>
                     </div>
                 </section>
                 <section id="project-skills-section" class="accord">
@@ -477,11 +485,20 @@ const port = {
             };
             this.contentHTML += `
                 </ul>
+                </section>
+                <section id="contact">
+                    <div class="card header">
+                        <h2>Contact</h2>
+                    </div>
+                    <div class="contact card">
+                        <p>If you want to work with me on something, let me know!  I pride myself on a clean inbox.</p>
+                        ${this.contactContentPart}
+                    </div>
                 </section>`;
-            this.contentHTML += this.contentContactSection;
-            this.contentHTML += this.linkedinLink;
-            this.contentHTML += this.githubLink;
-            this.contentHTML += `</section>`;
+            // this.contentHTML += this.contentContactSection;
+            // this.contentHTML += this.linkedinLink;
+            // this.contentHTML += this.githubLink;
+            // this.contentHTML += `</section>`;
             // this.contentHTML += this.imageModal;
             loading.style.display = 'none';
             this.target.innerHTML = this.contentHTML;

@@ -94,7 +94,28 @@ section {
 }
 
 h2 {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 1rem 1.25rem;
+}
+
+h1::after, h2::after {
+    position: relative;
     display: inline-block;
+    content: "";
+    background-color: var(--casLight);
+}
+
+h1::after {
+    height: 2.7rem;
+    width: 1.35rem;
+}
+
+h2::after {
+    height: 2rem;
+    width: 1rem;
 }
 
 p {
@@ -114,6 +135,12 @@ nav {
 .card {
     border-radius: 0.5rem;
     padding: 0.75rem 0.75rem;
+}
+
+.card.header {
+    display: inline-block;
+    padding: 0;
+    margin-bottom: 1.25rem;
 }
 
 h3, h4 {
@@ -313,7 +340,10 @@ li.tag.js, li.tag.backend, li.tag.misc {
     padding-top: 1.5rem;
 }
 
-h1 {
+.card.landing .text-container h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: .5rem 0;
     text-align: center;
 }
