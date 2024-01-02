@@ -101,7 +101,7 @@ h2 {
     padding: 1rem 1.25rem;
 }
 
-h1::after, h2::after {
+/* h1::after, h2::after {
     position: relative;
     display: inline-block;
     content: "";
@@ -116,7 +116,7 @@ h1::after {
 h2::after {
     height: 2rem;
     width: 1rem;
-}
+} */
 
 p {
     margin: .5rem 0;
@@ -140,7 +140,7 @@ nav {
 .card.header {
     display: inline-block;
     padding: 0;
-    margin-bottom: 1.25rem;
+    margin-bottom: 3rem;
 }
 
 h3, h4 {
@@ -325,6 +325,24 @@ li.tag.js, li.tag.backend, li.tag.misc {
     border-color: var(--tagLinux);
     background-color: var(--tagLinux);
 }
+/* ACCORD */
+.accord {
+    overflow: hidden;
+    position: relative;
+    margin: 0 0 1.5rem;
+}
+
+.accord-button {
+    margin-bottom: 1.5rem;
+}
+
+.accord svg {
+    position: absolute;
+    top: 1.25rem;
+    right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
 
 /* LANDING SECTION */
 #landing {
@@ -404,9 +422,39 @@ a.button.proj-link {
     padding-bottom: 1.5rem;
 }
 
+/* PROJ-LANDING */
+#proj-landing {
+    margin: 0;
+}
+
+.ext-link-container {
+    margin-left: auto;
+    width: 10rem;
+}
+
+a.button.ext-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: end;
+    margin: 0 0 0.5rem auto;
+    padding: 0.5rem 0.6rem 0.5rem 1rem;
+}
+
+.ext-link svg {
+    margin-left: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.ext-link svg path {
+    fill: var(--casDark);
+}
+
 /* FOOTER */ 
 footer p.card {
     display: inline;
     margin: 0.5rem;
     border-radius: 0.5rem 0.5rem 0 0;
+    font-size: 0.8rem;
 }

@@ -179,7 +179,7 @@ const port = {
                     <p id="modal-alt"></p>
                 </div>
         </div>`,
-    accordHeightCollapsed: 'calc(26px + 3rem)',
+    accordHeightCollapsed: '4rem',
     checkURL: function() {
         // Checks if URL has hash in it, if hash is from a project link then loads said project's page
         let capturedURL = window.location.href;
@@ -403,30 +403,46 @@ const port = {
                         <a id="back-button" href="">Back</a>
                     </div>
                 </nav>
-                <section id="project-header-section">
+                <section id="proj-landing">
                     <div class="card header">
-                        <h2 tabindex="0">${port.jsonData.acf.proj_sub_title}</h2>
+                        <h2 tabindex="0">${port.jsonData.title.rendered}</h2>
                     </div>
                     <div class="card">
                         <img src="${port.jsonData['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${port.jsonData['_embedded']['wp:featuredmedia'][0].alt_text}">
                         <div class="proj-text-container">
-                            <h3 tabindex="0">${port.jsonData.title.rendered}</h3>
+                            <h3 tabindex="0">${port.jsonData.acf.proj_sub_title}</h3>
                             <p>${port.jsonData.acf.proj_overview}</p>`;
             this.outputContentTools(port.jsonData['_embedded']['wp:term'][0])
             this.contentHTML += `
-                            <a href="${port.jsonData.acf.proj_live_link}" target="_blank">Live Site</a>
-                            <a href="${port.jsonData.acf.proj_github_link}" target="_blank">GitHub Repo</a>
+                            <div class="ext-link-container">
+                                <a href="${port.jsonData.acf.proj_live_link}" class="ext-link button" target="_blank">
+                                    Live Site
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
+                                    </svg>
+                                </a>
+                                <a href="${port.jsonData.acf.proj_github_link}" class="ext-link button" target="_blank">
+                                    GitHub Repo
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </section>
-                <section id="project-skills-section" class="accord">
-                    <h3 tabindex="0" class="accord-button">What I Learned</h3>
-                    ${this.arrowSVG}
-                    <p>${port.jsonData.acf.proj_skills_list}</p>
-                </section>`;
+                <section id="proj-details">
+                    <div class="card header">
+                        <h2>Details</h2>
+                    </div>
+                    <section id="proj-skills" class="card accord">
+                        <h3 tabindex="0" class="accord-button">What I Learned</h3>
+                        ${this.arrowSVG}
+                        <p>${port.jsonData.acf.proj_skills_list}</p>
+                    </section>`;
             let sections = port.jsonData.acf.proj_section_gen;
             if (Array.isArray(sections)) {
-                this.contentHTML += `<section id="project-sect-section" class="accord">`;
+                this.contentHTML += `<section id="project-sect-section" class="card accord">`;
                 for (let section of sections) {
                     this.contentHTML += `
                             <h3 tabindex="0" class="accord-button">${section.proj_sect_gen_heading}</h3>
@@ -443,29 +459,34 @@ const port = {
                 this.contentHTML += `</section>`;
             }
             this.contentHTML += `
-                <section id="project-feat-section" class="accord">
-                    <h3 tabindex="0" class="accord-button">Features</h3>
-                    ${this.arrowSVG}
-                    <p>${port.jsonData.acf.proj_features_intro}</p>`;
+                    <section id="project-feat-section" class="card accord">
+                        <h3 tabindex="0" class="accord-button">Features</h3>
+                        ${this.arrowSVG}
+                        <p>${port.jsonData.acf.proj_features_intro}</p>`;
             let features = port.jsonData.acf.proj_features_gen;
             for (let feature of features) {
                 console.log(feature);
                 this.contentHTML += `
-                    <h4 tabindex="0">${feature.proj_feat_gen_heading}</h4>
-                    <p>${feature.proj_feat_gen_text}</p>
-                    ${feature.proj_feat_gen_code}`;
+                        <h4 tabindex="0">${feature.proj_feat_gen_heading}</h4>
+                        <p>${feature.proj_feat_gen_text}</p>
+                        ${feature.proj_feat_gen_code}`;
                 if (feature.proj_feat_gen_image) {
                     // let imageID = feature.proj_feat_gen_image;
                     // let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
                     // let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
                     this.contentHTML += `
-                        <img src="${feature.proj_feat_gen_image.sizes.large}" alt="${feature.proj_feat_gen_image.alt}">`;
+                            <img src="${feature.proj_feat_gen_image.sizes.large}" alt="${feature.proj_feat_gen_image.alt}">`;
                 };
             };
             this.contentHTML += `
+                    </section>
                 </section>
-                <section id="project-gallery">
-                <ul>`;
+                <section id="proj-gallery">
+                <div class="card header">
+                    <h2>Screenshots</h2>
+                </div>
+                <div class="card">
+                    <ul>`;
             // let galleryImages = port.jsonData.acf.proj_images;
             // for (let galleryImage of galleryImages) {
             //     let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
@@ -478,13 +499,14 @@ const port = {
             this.projectGalleryArray = this.jsonData.acf.proj_images;
             for (let i = 0; i < this.projectGalleryArray.length; i++) {
                 this.contentHTML += `
-                    <li>
-                        <img class="modable" src="${this.projectGalleryArray[i].sizes.medium}" alt="${this.projectGalleryArray[i].alt}" data-index="${i}"/>
-                    </li>
+                        <li>
+                            <img class="modable" src="${this.projectGalleryArray[i].sizes.medium}" alt="${this.projectGalleryArray[i].alt}" data-index="${i}"/>
+                        </li>
                 `;
             };
             this.contentHTML += `
-                </ul>
+                    </ul>
+                </div>
                 </section>
                 <section id="contact">
                     <div class="card header">
