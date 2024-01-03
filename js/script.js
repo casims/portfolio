@@ -415,14 +415,14 @@ const port = {
             this.outputContentTools(port.jsonData['_embedded']['wp:term'][0])
             this.contentHTML += `
                             <div class="ext-link-container">
-                                <a href="${port.jsonData.acf.proj_live_link}" class="ext-link button" target="_blank">
-                                    Live Site
+                                <a href="${port.jsonData.acf.proj_github_link}" class="ext-link button" target="_blank">
+                                    GitHub Repo
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
                                     </svg>
                                 </a>
-                                <a href="${port.jsonData.acf.proj_github_link}" class="ext-link button" target="_blank">
-                                    GitHub Repo
+                                <a href="${port.jsonData.acf.proj_live_link}" class="ext-link button" target="_blank">
+                                    Live Site
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
                                     </svg>
@@ -532,10 +532,12 @@ const port = {
         let accordHeight = accord.scrollHeight;
         accord.style.height = accordHeight + 'px';
         accord.setAttribute('expanded', 'true');
+        accord.classList.add('expanded');
     },
     accordCollapse: function(accord) {
         accord.style.height = this.accordHeightCollapsed;
         accord.setAttribute('expanded', 'false');
+        accord.classList.remove('expanded');
     },
     accordListeners: function() {
         // Functionality for accordians on individual project page, also expands first accordian on page load
@@ -556,6 +558,14 @@ const port = {
                 };
             });
         };
+        // Collapses all open acoordians on window resize, prevents cut off text when section 
+        window.addEventListener('resize', function() {
+            for (let accordSection of accordSections) {
+                if (accordSection.getAttribute('expanded') === 'true') {
+                    port.accordExpand(accordSection);
+                };
+            };
+        });
     },
     projectGalleryIndex: null,
     modalListeners: function() {

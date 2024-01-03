@@ -18,8 +18,9 @@
 /* VARIABLES / PALETTE */
 :root {
     --casDark: #12120f;
-    --casDarkTrans: rgba(18, 18, 15, 0.9);
-    --casLight: #bec5bb;
+    --casDarkTrans: rgba(18, 18, 15, 0.75);
+    /* --casLight: #bec5bb; */
+    --casLight: rgb(193, 187, 187);
     --tagHTML5: #e54c21;
     --tagCSS3: #214ce5;
     --tagSASS: #cf649a;
@@ -37,7 +38,25 @@
 
 /* COLOURS */
 body {
-    background-color: var(--casDarkTrans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../media/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+body::after {
+    content: "";
+    background: var(--casDarkTrans);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
 }
 
 .card {
@@ -120,6 +139,13 @@ h2::after {
 
 p {
     margin: .5rem 0;
+    line-height: 1.25rem;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 img {
@@ -145,6 +171,10 @@ nav {
 
 h3, h4 {
     margin: 0.5rem 0;
+}
+
+h4 {
+    margin-top: 2rem;
 }
 
 /* LINKS / BUTTONS */
@@ -214,6 +244,7 @@ ul.tool-tags {
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
     padding: 0;
+    margin: 1rem 0;
     list-style: none;
 }
 
@@ -325,11 +356,14 @@ li.tag.js, li.tag.backend, li.tag.misc {
     border-color: var(--tagLinux);
     background-color: var(--tagLinux);
 }
+
 /* ACCORD */
 .accord {
     overflow: hidden;
     position: relative;
     margin: 0 0 1.5rem;
+    height: 4rem;
+    transition: 0.3s height ease;
 }
 
 .accord-button {
@@ -342,6 +376,11 @@ li.tag.js, li.tag.backend, li.tag.misc {
     right: 1rem;
     width: 1.5rem;
     height: 1.5rem;
+    transition: 0.3s transform ease;
+}
+
+.accord.expanded svg {
+    transform: rotate(-180deg);
 }
 
 /* LANDING SECTION */
@@ -424,7 +463,11 @@ a.button.proj-link {
 
 /* PROJ-LANDING */
 #proj-landing {
-    margin: 0;
+    margin: 0 0 7rem;
+}
+
+#proj-landing .card.header {
+    margin-bottom: 1.5rem;
 }
 
 .ext-link-container {
@@ -434,7 +477,7 @@ a.button.proj-link {
 
 a.button.ext-link {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     text-align: end;
     margin: 0 0 0.5rem auto;
@@ -452,9 +495,13 @@ a.button.ext-link {
 }
 
 /* FOOTER */ 
+footer {
+    padding-bottom: 1.25rem;
+}
+
 footer p.card {
     display: inline;
     margin: 0.5rem;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: 0.5rem;
     font-size: 0.8rem;
 }
