@@ -173,10 +173,6 @@ h3, h4 {
     margin: 0.5rem 0;
 }
 
-h4 {
-    margin-top: 2rem;
-}
-
 /* LINKS / BUTTONS */
 a.button, a.social-link, button.copy-clipboard {
     background-color: var(--casLight);
@@ -364,6 +360,10 @@ li.tag.js, li.tag.backend, li.tag.misc {
     margin: 0 0 1.5rem;
     height: 4rem;
     transition: 0.3s height ease;
+}
+
+.accord h4 {
+    margin-top: 2rem;
 }
 
 .accord-button {
