@@ -216,8 +216,8 @@ const port = {
     },
     outputContentMain: async function() {
         // Outputs HTML for main page
-        this.target.innerHTML = '';
-        loading.style.display = 'block';
+        // this.target.innerHTML = '';
+        // loading.style.display = 'block';
         await this.getJSON(this.jsonURLMain);
         this.contentHTML = this.navMenu;
         this.contentHTML += `
@@ -262,8 +262,9 @@ const port = {
         // this.contentHTML += this.githubLink;
         // this.contentHTML += `</section>`;
         // this.contentHTML += this.imageModal;
-        loading.style.display = 'none';
+        // loading.style.display = 'none';
         this.target.innerHTML = this.contentHTML;
+        this.imageLoadCheck();
         // this.navMenuListeners();
     },
     outputContentTools: function(usedTools) {
@@ -382,8 +383,8 @@ const port = {
     projectGalleryArray: [],
     outputContentSingleProject: async function() {
         // Outputs HTML for individual projects
-        this.target.innerHTML = '';
-        loading.style.display = 'block';
+        // this.target.innerHTML = '';
+        // loading.style.display = 'block';
         await this.getJSON(this.jsonURLProject);
         if (port.jsonData.code) {
             this.contentHTML = `
@@ -412,7 +413,7 @@ const port = {
                         <div class="proj-text-container">
                             <h3 tabindex="0">${port.jsonData.acf.proj_sub_title}</h3>
                             <p>${port.jsonData.acf.proj_overview}</p>`;
-            this.outputContentTools(port.jsonData['_embedded']['wp:term'][0])
+            this.outputContentTools(port.jsonData['_embedded']['wp:term'][0]);
             this.contentHTML += `
                             <div class="ext-link-container">
                                 <a href="${port.jsonData.acf.proj_github_link}" class="ext-link button" target="_blank">
@@ -522,8 +523,9 @@ const port = {
             // this.contentHTML += this.githubLink;
             // this.contentHTML += `</section>`;
             // this.contentHTML += this.imageModal;
-            loading.style.display = 'none';
+            // loading.style.display = 'none';
             this.target.innerHTML = this.contentHTML;
+            this.imageLoadCheck();
             this.accordListeners();
             this.modalListeners();
         };
@@ -570,31 +572,19 @@ const port = {
     projectGalleryIndex: null,
     modalListeners: function() {
         // Functionality for image modals
-        let modal = document.getElementById('image-modal');
-        let prevButton = document.getElementById('prev-img');
-        let nextButton = document.getElementById('next-img');
-        // let modalWrapper = document.getElementById('modal-inner-wrapper');
-        // let modalPartImage = document.getElementById('modal-img');
-        // let modalPartCaption = document.getElementById('modal-alt');
+        const modal = document.getElementById('image-modal');
+        const prevButton = document.getElementById('prev-img');
+        const nextButton = document.getElementById('next-img');
+        const closebutton = document.getElementById('close');
         let modableImages = document.getElementsByClassName('modable');
         for (let i = 0; i < modableImages.length; i++) {
             modableImages[i].addEventListener('click', function(event) {
                 port.projectGalleryIndex = event.target.dataset.index;
                 modal.style.display = 'block';
-                // modalPartImage.src = event.target.src;
-                // modalPartCaption.innerHTML = event.target.alt;
                 port.modalImageLoader();
-                setTimeout(function() {
-                    modal.style.opacity = '100%';
-                }, 10);
+                port.modalShow(modal);
             });
         };
-        // modal.addEventListener('click', function() {
-        //     modal.style.opacity = '0%';
-        //     setTimeout(function() {
-        //         modal.style.display = 'none';
-        //     }, 300);
-        // });
         prevButton.addEventListener('click', function() {
             port.projectGalleryIndex--;
             if (port.projectGalleryIndex === -1) {
@@ -609,9 +599,9 @@ const port = {
             };
             port.modalImageLoader();
         });
-        // modalWrapper.addEventListener('click', function(event) {
-        //     event.stopPropagation();
-        // });
+        closebutton.addEventListener('click', function() {
+            port.modalHide(modal);
+        });
     },
     modalImageLoader: function() {
         let modalPartImage = document.getElementById('modal-img');
@@ -619,6 +609,39 @@ const port = {
         modalPartImage.src = port.projectGalleryArray[port.projectGalleryIndex].sizes['1536x1536'];
         modalPartImage.alt = port.projectGalleryArray[port.projectGalleryIndex].alt;
         modalPartCaption.innerHTML = port.projectGalleryArray[port.projectGalleryIndex].alt;
+    },
+    body: document.querySelector('body'),
+    modalHide: function(modalTarget) {
+        // setTimeout(() => {
+            modalTarget.className = 'hidden';
+            port.body.style.overflow = 'visible';
+            setTimeout(() => {
+                modalTarget.style.display = 'none';
+            }, 150);
+        // }, 150);
+    },
+    modalShow: function(modalTarget) {
+        modalTarget.style.display = 'flex';
+        port.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            modalTarget.className = '';
+        }, 1);
+
+    },
+    imageLoadCheck: function() {
+        let images = document.querySelectorAll('img');
+        let imageCount = images.length - 1;
+        let finishedCount = 0;
+        let loadObserver = function() {
+            this.removeEventListener('load', loadObserver);
+            finishedCount += 1;
+            if (finishedCount === imageCount) {
+                port.modalHide(port.loading);
+            };
+        };
+        images.forEach(image => {
+            image.addEventListener('load', loadObserver.bind(image), true);
+        });
     },
 };
 
@@ -628,5 +651,8 @@ window.onload = function() {
 };
 
 window.onhashchange = function() {
-    port.checkURL();
+    port.modalShow(port.loading);
+    setTimeout(() => {
+        port.checkURL();
+    }, 300);
 };

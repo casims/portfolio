@@ -160,7 +160,7 @@ nav {
 /* CARDS */
 .card {
     border-radius: 0.5rem;
-    padding: 0.75rem 0.75rem;
+    padding: 0.75rem;
 }
 
 .card.header {
@@ -216,6 +216,22 @@ a.social-link svg {
 
 button.copy-clipboard svg path, a.social-link svg path {
     fill: var(--casDark);
+}
+
+button.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px black solid;
+    border-radius: 9999px;
+    height: 3rem;
+    width: 3rem;
+    background-color: var(--casDark);
+}
+
+button.circle svg {
+    width: 1rem;
+    height: 1rem;
 }
 
 /* CONTACT PART */
@@ -504,4 +520,73 @@ footer p.card {
     margin: 0.5rem;
     border-radius: 0.5rem;
     font-size: 0.8rem;
+}
+
+/* MODALS */
+#loading, #image-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    transition: 0.15s opacity ease;
+}
+
+#loading.hidden, #image-modal.hidden {
+    opacity: 0;
+}
+
+/* LOADING MODAL */
+#loading {
+    background-color: var(--casDark);
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    width: 12rem;
+}
+
+.loading-bar-wrapper {
+    position: relative;
+    margin: 2rem auto 0;
+    height: 0.75rem;
+    width: 11rem;
+}
+
+.loading-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--casLight);
+}
+
+/* IMAGE MODAL */
+#image-modal {
+    display: none;
+    flex-direction: column;
+    background-color: var(--casDarkTrans);
+    padding: 0.75rem;
+}
+
+#close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+#image-modal .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    width: 7rem;
+}
+
+#modal-alt {
+    text-align: center;
 }
