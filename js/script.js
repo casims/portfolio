@@ -1,3 +1,4 @@
+import { Prism } from './prism.js';
 'use strict';
 
 const port = {
@@ -470,7 +471,7 @@ const port = {
                 this.contentHTML += `
                         <h4 tabindex="0">${feature.proj_feat_gen_heading}</h4>
                         <p>${feature.proj_feat_gen_text}</p>
-                        <pre><code>${feature.proj_feat_gen_code}</code></pre>`;
+                        <pre><code class="language-${feature.proj_feat_gen_code_lang}">${feature.proj_feat_gen_code}</code></pre>`;
                 if (feature.proj_feat_gen_image) {
                     // let imageID = feature.proj_feat_gen_image;
                     // let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
@@ -528,6 +529,7 @@ const port = {
             this.imageLoadCheck();
             this.accordListeners();
             this.modalListeners();
+            Prism.highlightAll();
         };
     },
     accordExpand: function(accord) {
