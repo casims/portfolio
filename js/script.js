@@ -467,11 +467,12 @@ const port = {
                         <p>${port.jsonData.acf.proj_features_intro}</p>`;
             let features = port.jsonData.acf.proj_features_gen;
             for (let feature of features) {
-                console.log(feature);
                 this.contentHTML += `
                         <h4 tabindex="0">${feature.proj_feat_gen_heading}</h4>
-                        <p>${feature.proj_feat_gen_text}</p>
-                        <pre><code class="language-${feature.proj_feat_gen_code_lang}">${feature.proj_feat_gen_code}</code></pre>`;
+                        <p>${feature.proj_feat_gen_text}</p>`;
+                if (feature.proj_feat_gen_code) {
+                    this.contentHTML += `<pre><code class="language-${feature.proj_feat_gen_code_lang}">${feature.proj_feat_gen_code}</code></pre>`;
+                };        
                 if (feature.proj_feat_gen_image) {
                     // let imageID = feature.proj_feat_gen_image;
                     // let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
