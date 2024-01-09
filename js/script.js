@@ -305,10 +305,10 @@ const port = {
                                 <h4 tabindex="0">${project.acf.proj_sub_title}</h4>
                             </a>
                             <p class="proj-date">${project.acf.proj_date}</p>
-                            <p class="proj-overview">${project.acf.proj_overview}</p>`;
+                            <p class="proj-overview">${project.acf.proj_overview}</p>
+                        </div>`;
                 this.outputContentTools(project['_embedded']['wp:term'][0]);
                 this.contentHTML += `
-                        </div>
                         <div class="proj-link-wrapper">
                             <a href="#${project.id}" class="button proj-link">
                                 Project Details
@@ -333,10 +333,10 @@ const port = {
                             <a href="#${project.id}" class="card-standard-link">
                                 <h3 tabindex="0">${project.title.rendered}</h3>
                             </a>
-                            <p>${project.acf.proj_overview}</p>`;
+                            <p>${project.acf.proj_overview}</p>
+                        </div>`;
                             this.outputContentTools(project['_embedded']['wp:term'][0]);
                             this.contentHTML += `
-                        </div>
                         <div class="proj-link-wrapper">
                             <a href="#${project.id}" class="button proj-link">
                                 Project Details

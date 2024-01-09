@@ -159,6 +159,12 @@ img {
     }
 }
 
+@media(min-width: 800px) {
+    main {
+        width: 44rem;
+    }
+}
+
 /* NAV */
 nav {
     display: none;
@@ -270,10 +276,11 @@ button.circle svg {
 ul.tool-tags {
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, fit-content(8rem));
     gap: 0.5rem;
+    margin: 1rem 0 1rem auto;
+    width: fit-content;
     padding: 0;
-    margin: 1rem 0;
     list-style: none;
 }
 
@@ -281,11 +288,20 @@ li.tag {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 8rem;
     height: 2.15rem;
     padding: 0 0.15rem;
     border: 2px var(--casLight) solid;
     border-radius: 0.25rem;
+}
+
+.landing ul.tool-tags {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.landing li.tag {
+    width: 100%;
 }
 
 li.tag, li.tag * {
@@ -322,11 +338,46 @@ li.tag.js, li.tag.backend, li.tag.misc {
 }
 
 @media(min-width: 520px) {
+    .landing ul.tool-tags {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
     ul.tool-tags {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, fit-content(8.5rem));
+        gap: 0.5rem 0;
+    }
+    .featured-project li.tag, .project li.tag {
+        margin-left: .5rem;
     }
     li.tag.backend, li.tag.misc {
         grid-column: 3 / 4;
+    }
+}
+
+@media(min-width: 800px) {
+    .landing ul.tool-tags {
+        grid-template-columns: repeat(5, 1fr);
+        margin-top: 3rem;
+        width: 100%;
+    }
+    ul.tool-tags {
+        grid-template-columns: repeat(4, fit-content(8rem));
+        margin-left: auto;
+    }
+    li.tag.front-end {
+        grid-column: 1 / 2;
+    }
+    li.tag.sub-front-end {
+        grid-column: 2 / 3;
+    }
+    li.tag.js {
+        grid-column: 3 / 4;
+    }
+    li.tag.backend {
+        grid-column: 4 / 5;
+    }
+    .landing li.tag.misc {
+        grid-column: 5 / 6;
     }
 }
 
@@ -463,6 +514,19 @@ li.tag.js, li.tag.backend, li.tag.misc {
     }
 }
 
+@media(min-width: 800px) {
+    .card.landing {
+        display: grid;
+        grid-template-columns: 1fr 18rem;
+    }
+    .landing .tool-tags {
+        grid-column: 1 / 3;
+    }
+    .landing .text-container {
+        align-self: center;
+    }
+}
+
 /* PROJECTS SECTION */
 .project.card, .featured-project.card {
     margin-bottom: 3rem;
@@ -549,10 +613,20 @@ footer {
 
 footer p.card {
     display: inline;
-    margin: 0.5rem;
+    margin: 1rem;
     border-radius: 0.5rem;
     font-size: 0.8rem;
     padding: 0.75rem;
+}
+
+@media(min-width: 600px) {
+    footer {
+        width: 32rem;
+        margin: 0 auto;
+    }
+    footer p.card {
+        margin: 0.5rem 0;
+    }
 }
 
 /* MODALS */
