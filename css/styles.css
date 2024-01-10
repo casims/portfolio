@@ -149,7 +149,13 @@ ul {
 }
 
 img {
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
+}
+
+@media(min-width: 400px) {
+    h2 {
+        padding: 1.5rem 2rem;
+    }
 }
 
 @media(min-width: 600px) {
@@ -162,6 +168,13 @@ img {
 @media(min-width: 800px) {
     main {
         width: 44rem;
+        margin-top: 0;
+    }
+}
+
+@media(min-width: 1000px) {
+    main {
+        width: 56rem;
     }
 }
 
@@ -193,6 +206,9 @@ h3, h4 {
 @media(min-width: 400px) {
     .card {
         padding: 2rem 2rem 3rem;
+    }
+    .card.header {
+        width: 50%;
     }
 }
 
@@ -515,15 +531,28 @@ li.tag.js, li.tag.backend, li.tag.misc {
 }
 
 @media(min-width: 800px) {
+    #landing {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .card.landing {
         display: grid;
         grid-template-columns: 1fr 18rem;
+        width: 100%;
     }
     .landing .tool-tags {
         grid-column: 1 / 3;
     }
     .landing .text-container {
         align-self: center;
+    }
+}
+
+@media(min-width: 1000px) {
+    .card.landing {
+        padding-right: 7rem;
+        padding-left: 7rem;
     }
 }
 
@@ -567,11 +596,23 @@ a.button.proj-link {
     fill: var(--casDark);
 }
 
+@media(min-width: 800px) {
+    .project.card, .featured-project.card {
+        margin-left: 5rem;
+    }
+}
+
 /* CONTACT SECTION */
+.contact.card {
+    margin: 0 auto;
+    max-width: 32rem;
+}
+
 .contact.card p {
     text-align: center;
     margin-bottom: 1rem;
 }
+
 
 /* PROJ-LANDING */
 #proj-landing {
@@ -626,6 +667,12 @@ footer p.card {
     }
     footer p.card {
         margin: 0.5rem 0;
+    }
+}
+
+@media(min-width: 800px) {
+    footer {
+        width: 44rem;
     }
 }
 
