@@ -409,11 +409,12 @@ const port = {
                     <div class="card header">
                         <h2 tabindex="0">${port.jsonData.title.rendered}</h2>
                     </div>
-                    <div class="card">
+                    <div class="card info">
                         <img src="${port.jsonData['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${port.jsonData['_embedded']['wp:featuredmedia'][0].alt_text}">
                         <div class="proj-text-container">
                             <h3 tabindex="0">${port.jsonData.acf.proj_sub_title}</h3>
-                            <p>${port.jsonData.acf.proj_overview}</p>`;
+                            <p>${port.jsonData.acf.proj_overview}</p>
+                        </div>`;
             this.outputContentTools(port.jsonData['_embedded']['wp:term'][0]);
             this.contentHTML += `
                             <div class="ext-link-container">
@@ -430,7 +431,6 @@ const port = {
                                     </svg>
                                 </a>
                             </div>
-                        </div>
                     </div>
                 </section>
                 <section id="proj-details">
@@ -488,7 +488,7 @@ const port = {
                 <div class="card header">
                     <h2>Screenshots</h2>
                 </div>
-                <div class="card">
+                <div class="card screenshots-container">
                     <ul>`;
             // let galleryImages = port.jsonData.acf.proj_images;
             // for (let galleryImage of galleryImages) {
