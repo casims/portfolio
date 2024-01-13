@@ -119,21 +119,21 @@ const port = {
         <nav id="site-navigation">
             <ul>
                 <li>
-                    <a href="#main">
+                    <a href="#main" class="circle">
                         <svg class="nav-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M12 6.453l9 8.375v9.172h-6v-6h-6v6h-6v-9.172l9-8.375zm12 5.695l-12-11.148-12 11.133 1.361 1.465 10.639-9.868 10.639 9.883 1.361-1.465z"/>
                         </svg>
                     </a>
                 </li>
                 <li>
-                    <a href="#projects">
+                    <a href="#projects" class="circle">
                         <svg class="nav-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/>
                         </svg>
                     </a>
                 </li>
                 <li>
-                    <a href="#contact">
+                    <a href="#contact" class="circle">
                         <svg class="nav-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M.026 24l11.974-11.607 11.974 11.607h-23.948zm11.964-23.961l-11.99 8.725v12.476l7.352-7.127-5.653-4.113 10.291-7.488 10.309 7.488-5.655 4.108 7.356 7.132v-12.476l-12.01-8.725z"/>
                         </svg>
@@ -191,22 +191,40 @@ const port = {
             if (isNaN(capturedID) && this.onSite === true) {
                 return;
             } else if (isNaN(capturedID) && this.onSite === false) {
-                this.outputContentMain();
+                port.modalShow(port.loading);
+                setTimeout(() => {
+                    this.outputContentMain();
+                }, 300);
+                // this.outputContentMain();
                 this.onSite = true;
             } else if (isNaN(capturedID) && this.onSite === null) {
                 // if "onSite === null" then user is starting a new session on the site, which means main page should load
-                this.outputContentMain();
+                port.modalShow(port.loading);
+                setTimeout(() => {
+                    this.outputContentMain();
+                }, 300);
+                // this.outputContentMain();
                 this.onSite = true;
             } else {
                 // Grabs Project URL from project link button, then plugs it into the API URL template to grab the project JSON data from WordPress
                 this.jsonURLProject = `https://casims.ca/csport/wp-json/wp/v2/csp-project/${capturedID}?acf_format=standard&_embed`;
-                scroll(0,0);
-                this.outputContentSingleProject();
+                port.modalShow(port.loading);
+                setTimeout(() => {
+                    scroll(0,0);
+                    this.outputContentSingleProject();
+                }, 300);
+                // scroll(0,0);
+                // this.outputContentSingleProject();
                 this.onSite = false;
             }
         } else {
-            scroll(0,0);
-            this.outputContentMain();
+            port.modalShow(port.loading);
+            setTimeout(() => {
+                scroll(0,0);
+                this.outputContentMain();
+            }, 300);
+            // scroll(0,0);
+            // this.outputContentMain();
             this.onSite = true;
         };  
     },
@@ -658,8 +676,8 @@ window.onload = function() {
 };
 
 window.onhashchange = function() {
-    port.modalShow(port.loading);
-    setTimeout(() => {
+    // port.modalShow(port.loading);
+    // setTimeout(() => {
         port.checkURL();
-    }, 300);
+    // }, 300);
 };
