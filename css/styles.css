@@ -362,6 +362,10 @@ button.circle svg, a.circle svg {
     height: 1rem;
 }
 
+#back-button svg {
+    transform: rotate(180deg);
+}
+
 /* CONTACT PART */
 .contact-container {
     margin: 0 auto;
