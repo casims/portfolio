@@ -525,8 +525,8 @@ li.tag.js, li.tag.backend, li.tag.misc {
     overflow: hidden;
     position: relative;
     margin: 0 0 1.5rem;
-    height: 4rem;
-    padding: 0.75rem 0.75rem 1.5rem;
+    height: 5.45rem;
+    padding: 2rem 0.75rem 1.5rem;
     transition: 0.3s height ease;
 }
 
@@ -536,16 +536,16 @@ li.tag.js, li.tag.backend, li.tag.misc {
 
 .accord-button {
     position: relative;
-    margin-bottom: 1.5rem;
+    margin: 0 0 2rem;
     z-index: 2;
 }
 
 .accord svg {
     position: absolute;
-    top: 1.25rem;
+    top: 2rem;
     right: 1rem;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.4rem;
+    height: 1.4rem;
     transition: 0.3s transform ease;
     z-index: 1;
 }
@@ -578,13 +578,11 @@ li.tag.js, li.tag.backend, li.tag.misc {
 @media(min-width: 1400px) {
     .accord {
         margin-left: 10rem;
+        padding-top: 1.7rem;
     }
     .accord img {
         margin: 1rem auto;
         display: block;
-    }
-    .accord-button {
-        margin-top: 0.35rem;
     }
 }
 
@@ -910,23 +908,30 @@ footer p.card {
 .loading-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 12rem;
 }
 
-.loading-bar-wrapper {
-    position: relative;
-    margin: 2rem auto 0;
-    height: 0.75rem;
-    width: 11rem;
+.loading-circle {
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--casLight);
+    border-radius: 9999px;
 }
 
-.loading-bar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: var(--casLight);
+.loading-animation-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    -webkit-animation: rotating 3s linear infinite;
+    -moz-animation: rotating 3s linear infinite;
+    -ms-animation: rotating 3s linear infinite;
+    -o-animation: rotating 3s linear infinite;
+    animation: rotating 3s linear infinite;
 }
 
 /* IMAGE MODAL */
@@ -952,4 +957,21 @@ footer p.card {
 
 #modal-alt {
     text-align: center;
+}
+
+@keyframes rotating {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
 }

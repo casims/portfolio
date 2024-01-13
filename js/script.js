@@ -180,7 +180,7 @@ const port = {
                     <p id="modal-alt"></p>
                 </div>
         </div>`,
-    accordHeightCollapsed: '4rem',
+    accordHeightCollapsed: '5.45rem',
     checkURL: function() {
         // Checks if URL has hash in it, if hash is from a project link then loads said project's page
         let capturedURL = window.location.href;
