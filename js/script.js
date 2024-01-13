@@ -254,8 +254,10 @@ const port = {
                     <h2>Contact</h2>
                 </div>
                 <div class="contact card">
-                    <p>If you want to work with me on something, let me know!  I pride myself on a clean inbox.</p>
-                    ${this.contactContentPart}
+                    <div class="inner-contact-container">
+                        <p>If you want to work with me on something, let me know!  I pride myself on a clean inbox.</p>
+                        ${this.contactContentPart}
+                    </div>
                 </div>
             </section>`;
         // this.contentHTML += this.contentContactSection;
@@ -516,8 +518,10 @@ const port = {
                         <h2>Contact</h2>
                     </div>
                     <div class="contact card">
-                        <p>If you want to work with me on something, let me know!  I pride myself on a clean inbox.</p>
-                        ${this.contactContentPart}
+                        <div class="inner-contact-container">
+                            <p>If you want to work with me on something, let me know!  I pride myself on a clean inbox.</p>
+                            ${this.contactContentPart}
+                        </div>
                     </div>
                 </section>`;
             // this.contentHTML += this.contentContactSection;
