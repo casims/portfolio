@@ -59,6 +59,10 @@ body::after {
     z-index: -1;
 }
 
+main {
+    display: none;
+}
+
 .card {
     background-color: var(--casDarkTrans);
     border: 1px black solid;
@@ -961,6 +965,31 @@ footer p.card {
 
 #modal-alt {
     text-align: center;
+}
+
+@media(min-width: 600px) {
+    #image-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+    #image-container img {
+        max-height: 22rem;
+        width: auto;
+        margin: 0 auto;
+        display:block;
+    }
+}
+
+@media(min-width: 1000px) {
+    #image-container {
+        width: 80%;
+    }
+}
+
+@media(min-width: 1200px) {
+    #image-container img {
+        max-height: 32rem;
+    }
 }
 
 @keyframes rotating {
