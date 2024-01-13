@@ -41,15 +41,15 @@
     html {
         scroll-behavior: initial !important;
     }
-    .accord {
+    .accord, .accord svg {
         transition: none !important;
     }
     .loading-animation-container {
-        -webkit-animation: none;
-        -moz-animation: none;
-        -ms-animation: none;
-        -o-animation: none;
-        animation: none;
+        -webkit-animation: none !important;
+        -moz-animation: none !important;
+        -ms-animation: none !important;
+        -o-animation: none !important;
+        animation: none !important;
     }
 }
 
