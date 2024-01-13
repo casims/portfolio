@@ -409,7 +409,7 @@ li.tag.js, li.tag.backend, li.tag.misc {
         grid-template-columns: repeat(3, fit-content(8.5rem));
         gap: 0.5rem 0;
     }
-    .featured-project li.tag, .project li.tag, .card-info li.tag {
+    .featured-project li.tag, .project li.tag, .card.info li.tag {
         margin-left: .5rem;
     }
     li.tag.backend, li.tag.misc {
@@ -928,7 +928,7 @@ footer p.card {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
     width: 3rem;
     height: 3rem;
     -webkit-animation: rotating 3s linear infinite;
