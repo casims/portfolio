@@ -255,6 +255,7 @@ nav {
     border: 1px black solid;
     padding: 0.3rem 0.25rem;
     border-radius: 9999px;
+    z-index: 9;
 }
 
 nav ul {
