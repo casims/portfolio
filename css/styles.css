@@ -1060,25 +1060,51 @@ footer p.card {
 
 #modal-alt {
     text-align: center;
+    margin-top: 1.5rem;
 }
 
 #image-container {
     margin: 0 auto;
 }
 
-#image-container img {
-    max-height: 18rem;
+#image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 9.5rem;
+}
+
+#image-wrapper .loading-animation-container {
+    position: absolute;
+    margin-top: 0;
+}
+
+#image-wrapper img {
+    height: 100%;
+    width: auto;
     margin: 0 auto;
     display: block;
+    z-index: 5;
+    transition:  0.1s opacity ease;
+}
+
+#image-wrapper img.hidden {
+    opacity: 0;
 }
 
 @media(min-width: 600px) {
     #image-container {
         width: 90%;
     }
-    #image-container img {
-        max-height: 22rem;
-        width: auto;
+    #image-wrapper {
+        height: 16rem;
+    }
+}
+
+@media(min-width: 800px) {
+    #image-wrapper {
+        height: 19rem;
     }
 }
 
@@ -1086,11 +1112,14 @@ footer p.card {
     #image-container {
         width: 80%;
     }
+    #image-wrapper {
+        height: 22rem;
+    }
 }
 
 @media(min-width: 1200px) {
-    #image-container img {
-        max-height: 32rem;
+    #image-wrapper {
+        height: 32rem;
     }
 }
 

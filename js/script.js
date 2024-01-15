@@ -646,9 +646,15 @@ const port = {
     modalImageLoader: function() {
         let modalPartImage = document.getElementById('modal-img');
         let modalPartCaption = document.getElementById('modal-alt');
-        modalPartImage.src = port.projectGalleryArray[port.projectGalleryIndex].sizes['1536x1536'];
-        modalPartImage.alt = port.projectGalleryArray[port.projectGalleryIndex].alt;
-        modalPartCaption.innerHTML = port.projectGalleryArray[port.projectGalleryIndex].alt;
+        modalPartImage.classList.add('hidden');
+        setTimeout(() => {
+            modalPartImage.src = port.projectGalleryArray[port.projectGalleryIndex].sizes['1536x1536'];
+            modalPartImage.alt = port.projectGalleryArray[port.projectGalleryIndex].alt;
+            modalPartCaption.innerHTML = port.projectGalleryArray[port.projectGalleryIndex].alt;
+            modalPartImage.addEventListener('load', function() {
+                modalPartImage.classList.remove('hidden');
+            })
+        }, 100);
     },
     body: document.querySelector('body'),
     modalHide: function(modalTarget) {
