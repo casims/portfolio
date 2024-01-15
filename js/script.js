@@ -353,7 +353,6 @@ const port = {
                             <a href="#${project.id}" class="card-standard-link">
                                 <h3 tabindex="0">${project.title.rendered}</h3>
                             </a>
-                            <p>${project.acf.proj_overview}</p>
                         </div>`;
                             this.outputContentTools(project['_embedded']['wp:term'][0]);
                             this.contentHTML += `
@@ -441,6 +440,7 @@ const port = {
                         <img src="${port.jsonData['_embedded']['wp:featuredmedia'][0].media_details.sizes.large.source_url}" alt="${port.jsonData['_embedded']['wp:featuredmedia'][0].alt_text}">
                         <div class="proj-text-container">
                             <h3 tabindex="0">${port.jsonData.acf.proj_sub_title}</h3>
+                            <p class="proj-date">${port.jsonData.acf.proj_date}</p>
                             <p>${port.jsonData.acf.proj_overview}</p>
                         </div>`;
             this.outputContentTools(port.jsonData['_embedded']['wp:term'][0]);
