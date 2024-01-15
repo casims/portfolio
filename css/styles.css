@@ -297,7 +297,7 @@ h3, h4 {
         padding: 2rem 2rem 3rem;
     }
     .card.header {
-        width: 50%;
+        min-width: 50%;
     }
 }
 
