@@ -646,6 +646,7 @@ li.tag.js, li.tag.backend, li.tag.misc {
 
 /* LANDING SECTION */
 #landing {
+    position: relative;
     margin-top: 0;
     min-height: 100vh;
 }
@@ -674,6 +675,16 @@ li.tag.js, li.tag.backend, li.tag.misc {
 .card.landing .text-container p {
     margin-bottom: 1.2rem;
     text-align: center;
+}
+
+.scroll-button-wrapper {
+    display: none;
+    position: absolute;
+    bottom: 1rem;
+    background-color: var(--casDarkTrans);
+    border: 1px black solid;
+    border-radius: 9999px;
+    padding: 0.25rem;
 }
 
 @media(min-width: 400px) {
@@ -724,6 +735,12 @@ li.tag.js, li.tag.backend, li.tag.misc {
 @media(min-width: 1600px) {
     .card.landing {
         padding: 6rem 25rem 7rem;
+    }
+}
+
+@media(min-height: 1200px) {
+    .scroll-button-wrapper {
+        display: initial;
     }
 }
 
@@ -778,6 +795,9 @@ a.button.proj-link {
         display: grid;
         grid-template-columns: 28rem 1fr;
         grid-gap: 0 1rem;
+    }
+    .featured-project.card a:first-child {
+        align-self: center;
     }
     .featured-project.card ul.tool-tags {
         grid-column: 1 / 3;
