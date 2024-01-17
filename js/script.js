@@ -572,7 +572,7 @@ const port = {
     },
     accordExpand: function(accord) {
         let accordHeight = accord.scrollHeight;
-        accord.style.height = accordHeight + 'px';
+        accord.style.height = `calc(${accordHeight + 'px'} + 2rem)`;
         accord.setAttribute('expanded', 'true');
         accord.classList.add('expanded');
     },

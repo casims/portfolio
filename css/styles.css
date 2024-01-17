@@ -586,7 +586,7 @@ li.tag.js, li.tag.backend, li.tag.misc {
     position: relative;
     margin: 0 0 1.5rem;
     height: 5.45rem;
-    padding: 2rem 0.75rem 1.5rem;
+    padding: 0 0.75rem;
     transition: 0.3s height ease;
 }
 
@@ -596,7 +596,9 @@ li.tag.js, li.tag.backend, li.tag.misc {
 
 .accord-button {
     position: relative;
-    margin: 0 0 2rem;
+    margin: 0;
+    padding: 2rem 0;
+    cursor: pointer;
     z-index: 2;
 }
 
@@ -616,6 +618,10 @@ li.tag.js, li.tag.backend, li.tag.misc {
 
 .accord img {
     margin-top: 1rem;
+}
+
+.accord.expanded {
+    padding-bottom: 2rem;
 }
 
 .accord.expanded svg {
@@ -638,7 +644,6 @@ li.tag.js, li.tag.backend, li.tag.misc {
 @media(min-width: 1400px) {
     .accord {
         margin-left: 10rem;
-        padding-top: 1.7rem;
     }
     .accord img {
         margin: 1rem auto;
