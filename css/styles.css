@@ -575,6 +575,10 @@ li.tag.js, li.tag.backend, li.tag.misc {
     transition: 0.3s height ease;
 }
 
+.accord .accord-content-container {
+    visibility: hidden;
+}
+
 .accord h4 {
     margin-top: 2rem;
 }

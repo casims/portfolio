@@ -415,7 +415,9 @@ const port = {
                     <section id="proj-skills" class="card accord">
                         <h3 tabindex="0" class="accord-button">What I Learned</h3>
                         ${this.arrowSVG}
-                        <p>${port.jsonData.acf.proj_skills_list}</p>
+                        <div class="accord-content-container" aria-hidden="true">
+                            <p>${port.jsonData.acf.proj_skills_list}</p>
+                        </div>
                     </section>`;
             let sections = port.jsonData.acf.proj_section_gen;
             if (Array.isArray(sections)) {
@@ -424,33 +426,38 @@ const port = {
                     this.contentHTML += `
                             <h3 tabindex="0" class="accord-button">${section.proj_sect_gen_heading}</h3>
                             ${this.arrowSVG}
-                            <p>${section.proj_sect_gen_text}</p>`;
+                            <div class="accord-content-container">
+                                <p>${section.proj_sect_gen_text}</p>`;
                         if (section.proj_sect_gen_image) {
                             this.contentHTML += `
-                            <img src="${section.proj_sect_gen_image.sizes.large}" alt="${section.proj_sect_gen_image.alt}">`;
+                                <img src="${section.proj_sect_gen_image.sizes.large}" alt="${section.proj_sect_gen_image.alt}">`;
                         }
                 };
-                this.contentHTML += `</section>`;
+                this.contentHTML += `
+                            </div>
+                        </section>`;
             }
             this.contentHTML += `
                     <section id="project-feat-section" class="card accord">
                         <h3 tabindex="0" class="accord-button">Features</h3>
                         ${this.arrowSVG}
-                        <p>${port.jsonData.acf.proj_features_intro}</p>`;
+                        <div class="accord-content-container" aria-hidden="true">
+                            <p>${port.jsonData.acf.proj_features_intro}</p>`;
             let features = port.jsonData.acf.proj_features_gen;
             for (let feature of features) {
                 this.contentHTML += `
-                        <h4 tabindex="0">${feature.proj_feat_gen_heading}</h4>
-                        <p>${feature.proj_feat_gen_text}</p>`;
+                            <h4 tabindex="0">${feature.proj_feat_gen_heading}</h4>
+                            <p>${feature.proj_feat_gen_text}</p>`;
                 if (feature.proj_feat_gen_code) {
                     this.contentHTML += `<pre><code class="language-${feature.proj_feat_gen_code_lang}">${feature.proj_feat_gen_code}</code></pre>`;
                 };        
                 if (feature.proj_feat_gen_image) {
                     this.contentHTML += `
-                        <img src="${feature.proj_feat_gen_image.sizes.large}" alt="${feature.proj_feat_gen_image.alt}">`;
+                            <img src="${feature.proj_feat_gen_image.sizes.large}" alt="${feature.proj_feat_gen_image.alt}">`;
                 };
             };
             this.contentHTML += `
+                        </div>
                     </section>
                 </section>
                 <section id="proj-gallery">
@@ -491,7 +498,9 @@ const port = {
     },
     accordExpand: function(accord) {
         let accordHeight = accord.scrollHeight;
+        let accordTargetInner = accord.querySelector('.accord-content-container');
         accord.style.height = `calc(${accordHeight + 'px'} + 2rem)`;
+        accordTargetInner.style.visibility = 'visible';
         // 2rem is for consistent padding to match accords with rest of styles
         accord.setAttribute('expanded', 'true');
         accord.classList.add('expanded');
@@ -507,8 +516,9 @@ const port = {
         let accordButtons = document.getElementsByClassName('accord-button');
         port.accordExpand(accordSections[0]);
         for (let i = 0; i < accordButtons.length; i++) {
-            accordButtons[i].addEventListener('focus', function(event) {
+            accordButtons[i].addEventListener('click', function(event) {
                 let accordTarget = event.target.parentElement;
+                let accordTargetInner = accordTarget.querySelector('.accord-content-container');
                 let isAccordExpanded = accordTarget.getAttribute('expanded') === 'true';
                 if (!isAccordExpanded) {
                     for (let accordSection of accordSections) {
@@ -517,6 +527,15 @@ const port = {
                     port.accordExpand(accordTarget);
                 } else {
                     port.accordCollapse(accordTarget);
+                    setTimeout(() => {
+                        accordTargetInner.style.visibility = 'hidden';
+                    }, 300);
+                    // Prevents content instantly dissapearing before shrink animation
+                };
+            });
+            accordButtons[i].addEventListener('keydown', (event) => {
+                if (event.code === 'Space' || event.code === 'Enter') {
+                  accordButtons[i].click();
                 };
             });
         };
