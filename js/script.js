@@ -203,7 +203,6 @@ const port = {
                 setTimeout(() => {
                     this.outputContentMain();
                 }, 300);
-                // this.outputContentMain();
                 this.onSite = true;
             } else {
                 // Grabs Project URL from project link button, then plugs it into the API URL template to grab the project JSON data from WordPress
@@ -213,8 +212,6 @@ const port = {
                     scroll(0,0);
                     this.outputContentSingleProject();
                 }, 300);
-                // scroll(0,0);
-                // this.outputContentSingleProject();
                 this.onSite = false;
             }
         } else {
@@ -223,8 +220,6 @@ const port = {
                 scroll(0,0);
                 this.outputContentMain();
             }, 300);
-            // scroll(0,0);
-            // this.outputContentMain();
             this.onSite = true;
         };  
     },
@@ -235,8 +230,6 @@ const port = {
     },
     outputContentMain: async function() {
         // Outputs HTML for main page
-        // this.target.innerHTML = '';
-        // loading.style.display = 'block';
         await this.getJSON(this.jsonURLMain);
         this.contentHTML = this.navMenu;
         this.contentHTML += `
@@ -285,15 +278,8 @@ const port = {
                     </div>
                 </div>
             </section>`;
-        // this.contentHTML += this.contentContactSection;
-        // this.contentHTML += this.linkedinLink;
-        // this.contentHTML += this.githubLink;
-        // this.contentHTML += `</section>`;
-        // this.contentHTML += this.imageModal;
-        // loading.style.display = 'none';
         this.target.innerHTML = this.contentHTML;
         this.imageLoadCheck();
-        // this.navMenuListeners();
     },
     outputContentTools: function(usedTools) {
         // Outputs tool tags for both the landing section and projects
@@ -376,20 +362,6 @@ const port = {
             };
         };
     },
-    // navMenuListeners: function() {
-    //     // Makes nav buttons on main page change color on hover
-    //     let navButtons = document.getElementsByClassName('nav-button');
-    //     for (let i = 0; i < navButtons.length; i++) {
-    //         navButtons[i].addEventListener('mouseover', function(event) {
-    //             event.target.children[0].style.fill = 'var(--tuskWhite)';
-    //             event.target.style.borderColor = 'var(--tuskWhite)';
-    //         });
-    //         navButtons[i].addEventListener('mouseleave', function(event) {
-    //             event.target.children[0].style.fill = '';
-    //             event.target.style.borderColor = '';
-    //         });
-    //     };
-    // },
     toolkitListeners: function() {
         // Displays name of language on hover of language icons
         let toolOutput = document.getElementById('tool-output-text');
@@ -409,9 +381,6 @@ const port = {
     },
     projectGalleryArray: [],
     outputContentSingleProject: async function() {
-        // Outputs HTML for individual projects
-        // this.target.innerHTML = '';
-        // loading.style.display = 'block';
         await this.getJSON(this.jsonURLProject);
         if (port.jsonData.code) {
             this.contentHTML = `
@@ -486,9 +455,6 @@ const port = {
                             ${this.arrowSVG}
                             <p>${section.proj_sect_gen_text}</p>`;
                         if (section.proj_sect_gen_image) {
-                            // let imageID = section.proj_sect_gen_image;
-                            // let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
-                            // let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
                             this.contentHTML += `
                             <img src="${section.proj_sect_gen_image.sizes.large}" alt="${section.proj_sect_gen_image.alt}">`;
                         }
@@ -509,9 +475,6 @@ const port = {
                     this.contentHTML += `<pre><code class="language-${feature.proj_feat_gen_code_lang}">${feature.proj_feat_gen_code}</code></pre>`;
                 };        
                 if (feature.proj_feat_gen_image) {
-                    // let imageID = feature.proj_feat_gen_image;
-                    // let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
-                    // let capturedImageObj = arrayOfImageObjs.find(o => o.id === imageID);
                     this.contentHTML += `
                         <img src="${feature.proj_feat_gen_image.sizes.large}" alt="${feature.proj_feat_gen_image.alt}">`;
                 };
@@ -525,15 +488,6 @@ const port = {
                 </div>
                 <div class="card screenshots-container">
                     <ul>`;
-            // let galleryImages = port.jsonData.acf.proj_images;
-            // for (let galleryImage of galleryImages) {
-            //     let arrayOfImageObjs = port.jsonData['_embedded']['acf:attachment'];
-            //     let capturedImageObj = arrayOfImageObjs.find(o => o.id === galleryImage);
-            //     this.contentHTML += `
-            //         <li>
-            //             <img class="modable" src="${capturedImageObj.media_details.sizes.medium.source_url}" alt="${capturedImageObj.alt_text}">
-            //         </li>`;
-            // };
             this.projectGalleryArray = this.jsonData.acf.proj_images;
             for (let i = 0; i < this.projectGalleryArray.length; i++) {
                 this.contentHTML += `
@@ -557,12 +511,6 @@ const port = {
                         </div>
                     </div>
                 </section>`;
-            // this.contentHTML += this.contentContactSection;
-            // this.contentHTML += this.linkedinLink;
-            // this.contentHTML += this.githubLink;
-            // this.contentHTML += `</section>`;
-            // this.contentHTML += this.imageModal;
-            // loading.style.display = 'none';
             this.target.innerHTML = this.contentHTML;
             this.imageLoadCheck();
             this.accordListeners();
@@ -658,13 +606,11 @@ const port = {
     },
     body: document.querySelector('body'),
     modalHide: function(modalTarget) {
-        // setTimeout(() => {
             modalTarget.className = 'hidden';
             port.body.style.overflow = 'visible';
             setTimeout(() => {
                 modalTarget.style.display = 'none';
             }, 150);
-        // }, 150);
     },
     modalShow: function(modalTarget) {
         modalTarget.style.display = 'flex';
@@ -697,8 +643,5 @@ window.onload = function() {
 };
 
 window.onhashchange = function() {
-    // port.modalShow(port.loading);
-    // setTimeout(() => {
-        port.checkURL();
-    // }, 300);
+    port.checkURL();
 };
