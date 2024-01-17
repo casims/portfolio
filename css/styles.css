@@ -691,7 +691,7 @@ li.tag.js, li.tag.backend, li.tag.misc {
 .scroll-button-wrapper {
     display: none;
     position: absolute;
-    bottom: 1rem;
+    bottom: 10%;
     background-color: var(--casDarkTrans);
     border: 1px black solid;
     border-radius: 9999px;
