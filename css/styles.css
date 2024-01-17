@@ -20,7 +20,6 @@
     --casDark: #12120f;
     --casDarkTrans: rgba(18, 18, 15, 0.85);
     --casLightTrans: rgba(18, 18, 15, 0.5);
-    /* --casLight: #bec5bb; */
     --casLight: rgb(193, 187, 187);
     --tagHTML5: #e54c21;
     --tagCSS3: #214ce5;
@@ -159,23 +158,6 @@ h2 {
     padding: 1rem 1.25rem;
 }
 
-/* h1::after, h2::after {
-    position: relative;
-    display: inline-block;
-    content: "";
-    background-color: var(--casLight);
-}
-
-h1::after {
-    height: 2.7rem;
-    width: 1.35rem;
-}
-
-h2::after {
-    height: 2rem;
-    width: 1rem;
-} */
-
 p {
     margin: .5rem 0;
 }
@@ -225,7 +207,6 @@ img {
         width: 68rem;
     }
     #projects, #contact, #proj-landing, #proj-details, #proj-gallery {
-        /* width: 56rem; */
         margin: 3.5rem 0 10rem;
     }
 }
@@ -234,17 +215,11 @@ img {
     main {
         width: 80rem;
     }
-    #projects, #contact, #proj-landing, #proj-details, #proj-gallery {
-        /* width: 68rem; */
-    }
 }
 
 @media(min-width: 1600px) {
     main {
         width: 90rem;
-    }
-    #projects, #contact, #proj-landing, #proj-details, #proj-gallery {
-        /* width: 80rem; */
     }
 }
 
@@ -1067,7 +1042,6 @@ footer p.card {
 #image-modal {
     display: none;
     flex-direction: column;
-    /* background-color: var(--casLightTrans); */
     backdrop-filter: blur(10px);
     padding: 0.75rem;
 }
@@ -1092,7 +1066,6 @@ footer p.card {
 
 #image-container {
     margin: 0 auto;
-    /* background-color: var(--casDarkTrans); */
 }
 
 #image-wrapper {
