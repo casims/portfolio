@@ -661,7 +661,6 @@ const port = {
         // setTimeout(() => {
             modalTarget.className = 'hidden';
             port.body.style.overflow = 'visible';
-            port.target.style.filter = 'none';
             setTimeout(() => {
                 modalTarget.style.display = 'none';
             }, 150);
@@ -670,7 +669,6 @@ const port = {
     modalShow: function(modalTarget) {
         modalTarget.style.display = 'flex';
         port.body.style.overflow = 'hidden';
-        port.target.style.filter = 'blur(6px)';
         setTimeout(() => {
             modalTarget.className = '';
         }, 1);
