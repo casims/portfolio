@@ -167,19 +167,6 @@ const port = {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M12 21l-12-18h24z"/>
         </svg>`,
-    contentContactSection: `
-        <section id="contact">
-            <h2 tabindex="0">Contact</h2>
-            <p>I pride myself on a clean inbox.</p>
-            <a class="email-copy" href="mailto:connor@casims.ca">connor@casims.ca</a>`,
-    imageModal: `
-        <div id="image-modal">
-            <span id="modal-close">&times;</span>
-                <div id="modal-inner-wrapper">
-                    <img id="modal-img"></img>
-                    <p id="modal-alt"></p>
-                </div>
-        </div>`,
     accordHeightCollapsed: '5.45rem',
     checkURL: function() {
         // Checks if URL has hash in it, if hash is from a project link then loads said project's page
