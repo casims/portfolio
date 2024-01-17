@@ -356,6 +356,7 @@ button.circle, a.circle {
     height: 3rem;
     width: 3rem;
     background-color: var(--casDark);
+    cursor: pointer;
 }
 
 button.circle svg, a.circle svg {
@@ -955,6 +956,10 @@ a.button.ext-link {
 .screenshots-container ul li img {
     height: 100%;
     width: auto;
+}
+
+img.modable {
+    cursor: pointer;
 }
 
 @media(min-width: 800px) {
