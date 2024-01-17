@@ -587,7 +587,7 @@ const port = {
         let accordButtons = document.getElementsByClassName('accord-button');
         port.accordExpand(accordSections[0]);
         for (let i = 0; i < accordButtons.length; i++) {
-            accordButtons[i].addEventListener('click', function(event) {
+            accordButtons[i].addEventListener('focus', function(event) {
                 let accordTarget = event.target.parentElement;
                 let isAccordExpanded = accordTarget.getAttribute('expanded') === 'true';
                 if (!isAccordExpanded) {
