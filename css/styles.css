@@ -313,6 +313,11 @@ a.button, a.social-link, button.copy-clipboard {
     border-radius: 0.25rem;
     border: none;
     cursor: pointer;
+    transition: 0.2s box-shadow ease;
+}
+
+a.button:hover, a.social-link:hover, button.copy-clipboard:hover, .circle:hover {
+    box-shadow: 0 0 10px var(--casLight);
 }
 
 a.button {
@@ -361,6 +366,7 @@ button.circle, a.circle {
     width: 3rem;
     background-color: var(--casDarkTrans);
     cursor: pointer;
+    transition: 0.2s box-shadow ease;
 }
 
 button.circle svg, a.circle svg {
