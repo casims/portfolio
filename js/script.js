@@ -168,6 +168,7 @@ const port = {
             <path d="M12 21l-12-18h24z"/>
         </svg>`,
     accordHeightCollapsed: '5.45rem',
+    // Height that accords with be set to at default, needs to match styles in CSS
     checkURL: function() {
         // Checks if URL has hash in it, if hash is from a project link then loads said project's page
         let capturedURL = window.location.href;
@@ -182,7 +183,6 @@ const port = {
                 setTimeout(() => {
                     this.outputContentMain();
                 }, 300);
-                // this.outputContentMain();
                 this.onSite = true;
             } else if (isNaN(capturedID) && this.onSite === null) {
                 // if "onSite === null" then user is starting a new session on the site, which means main page should load
@@ -349,24 +349,8 @@ const port = {
             };
         };
     },
-    toolkitListeners: function() {
-        // Displays name of language on hover of language icons
-        let toolOutput = document.getElementById('tool-output-text');
-        let toolSVGs = document.getElementsByClassName('svg-hover');
-        for (let i = 0; i < toolSVGs.length; i++) {
-            toolSVGs[i].addEventListener('mouseover', function(event) {
-                let toolClasses = event.target.classList;
-                let capturedToolID = toolClasses[1];
-                toolOutput.style.width = '13rem';
-                toolOutput.innerHTML = port.toolNames[parseInt(capturedToolID)];
-            });
-            toolSVGs[i].addEventListener('mouseleave', function() {
-                toolOutput.style.width = '6px';
-                toolOutput.innerHTML = '';
-            });
-        };
-    },
     projectGalleryArray: [],
+    // Used to store images for Single Project Gallery/Image View Modal
     outputContentSingleProject: async function() {
         await this.getJSON(this.jsonURLProject);
         if (port.jsonData.code) {
@@ -508,6 +492,7 @@ const port = {
     accordExpand: function(accord) {
         let accordHeight = accord.scrollHeight;
         accord.style.height = `calc(${accordHeight + 'px'} + 2rem)`;
+        // 2rem is for consistent padding to match accords with rest of styles
         accord.setAttribute('expanded', 'true');
         accord.classList.add('expanded');
     },
@@ -545,6 +530,7 @@ const port = {
         });
     },
     projectGalleryIndex: null,
+    // Keeps track of which image user is viewing in array of images for project
     modalListeners: function() {
         // Functionality for image modals
         const modal = document.getElementById('image-modal');
@@ -608,6 +594,7 @@ const port = {
 
     },
     imageLoadCheck: function() {
+        // Makes it so "loading" modal waits until all images have loaded before dissapearing
         let images = document.querySelectorAll('img');
         let imageCount = images.length - 1;
         let finishedCount = 0;
