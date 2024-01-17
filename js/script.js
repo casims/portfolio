@@ -247,7 +247,7 @@ const port = {
                     </svg>
                     <div class="text-container">
                         <h1 id="main-title"><span>Connor</span><span class="hide"> </span>Sims</h1>
-                        <p>Web Developer with training for creating accessible, cross-browser compatible websites and a passion for problem solving.</p>
+                        <p>Web Developer with training in creating accessible, cross-browser compatible websites and a passion for problem solving.</p>
                         ${this.contactContentPart}
                     </div>`;
         this.outputContentTools();
