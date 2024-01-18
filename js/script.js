@@ -449,7 +449,14 @@ const port = {
                             <h4 tabindex="0">${feature.proj_feat_gen_heading}</h4>
                             <p>${feature.proj_feat_gen_text}</p>`;
                 if (feature.proj_feat_gen_code) {
-                    this.contentHTML += `<pre><code class="language-${feature.proj_feat_gen_code_lang}">${feature.proj_feat_gen_code}</code></pre>`;
+                    this.contentHTML += `
+                            <pre>
+                                <code class="language-${feature.proj_feat_gen_code_lang}">
+                                    <script type="prism-html-markup">
+                                        ${feature.proj_feat_gen_code}
+                                    </script>
+                                </code>
+                            </pre>`;
                 };        
                 if (feature.proj_feat_gen_image) {
                     this.contentHTML += `
