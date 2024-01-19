@@ -299,10 +299,10 @@ const port = {
                         </a>
                         <div class="card-text-container">
                             <a href="#${project.id}" class="card-standard-link">
-                                <h3 tabindex="0">${project.title.rendered}</h3>
+                                <h3>${project.title.rendered}</h3>
                             </a>
                             <a href="#${project.id}" class="card-standard-link">
-                                <h4 tabindex="0">${project.acf.proj_sub_title}</h4>
+                                <h4>${project.acf.proj_sub_title}</h4>
                             </a>
                             <p class="proj-date">${project.acf.proj_date}</p>
                             <p class="proj-overview">${project.acf.proj_overview}</p>
@@ -331,7 +331,7 @@ const port = {
                         </a>
                         <div class="card-text-container">
                             <a href="#${project.id}" class="card-standard-link">
-                                <h3 tabindex="0">${project.title.rendered}</h3>
+                                <h3>${project.title.rendered}</h3>
                             </a>
                         </div>`;
                             this.outputContentTools(project['_embedded']['wp:term'][0]);
@@ -376,7 +376,6 @@ const port = {
             this.imageLoadCheck();
         } else {
             this.contentHTML = `
-                <a class="screen-reader-text" href="#project-header-section">Skip to content</a>
                 <nav id="site-navigation">
                     <div id="nav-button-container">
                         <a id="back-button" href="#main" class="circle">
