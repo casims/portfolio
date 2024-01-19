@@ -477,7 +477,7 @@ const port = {
             for (let i = 0; i < this.projectGalleryArray.length; i++) {
                 this.contentHTML += `
                         <li>
-                            <img class="modable" src="${this.projectGalleryArray[i].sizes.medium}" alt="${this.projectGalleryArray[i].alt}" data-index="${i}"/>
+                            <img tabindex="0" class="modable" src="${this.projectGalleryArray[i].sizes.medium}" alt="${this.projectGalleryArray[i].alt}" data-index="${i}"/>
                         </li>
                 `;
             };
@@ -571,6 +571,11 @@ const port = {
                 port.modalImageLoader();
                 port.modalShow(modal);
             });
+            modableImages[i].addEventListener('keydown', (event) => {
+                if (event.code === 'Space' || event.code === 'Enter') {
+                  modableImages[i].click();
+                };
+            });
         };
         prevButton.addEventListener('click', function() {
             port.projectGalleryIndex--;
@@ -617,7 +622,7 @@ const port = {
         setTimeout(() => {
             modalTarget.className = '';
         }, 1);
-
+        port.trapFocus(modalTarget);
     },
     imageLoadCheck: function() {
         // Makes it so "loading" modal waits until all images have loaded before dissapearing
@@ -639,6 +644,38 @@ const port = {
             image.addEventListener('load', loadObserver.bind(image), true);
         });
     },
+    trapFocus: function(element) {
+        // Code is from: https://hidde.blog/using-javascript-to-trap-focus-in-an-element/
+        // Used to trap focus inside a modal when a modal is present
+        var focusableEls = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])');
+        var firstFocusableEl = focusableEls[0];  
+        var lastFocusableEl = focusableEls[focusableEls.length - 1];
+        var KEYCODE_TAB = 9;
+
+        if (focusableEls.length > 0) {
+            focusableEls[1].focus();
+        };
+      
+        element.addEventListener('keydown', function(e) {
+          var isTabPressed = (e.key === 'Tab' || e.keyCode === KEYCODE_TAB);
+      
+          if (!isTabPressed) { 
+            return; 
+          }
+      
+          if ( e.shiftKey ) /* shift + tab */ {
+            if (document.activeElement === firstFocusableEl) {
+              lastFocusableEl.focus();
+                e.preventDefault();
+              }
+            } else /* tab */ {
+            if (document.activeElement === lastFocusableEl) {
+              firstFocusableEl.focus();
+                e.preventDefault();
+              }
+            }
+        });
+      }
 };
 
 // "Checks URL" for hash links whenever page loads or URL changes

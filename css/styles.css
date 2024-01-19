@@ -295,6 +295,10 @@ a.button:hover, a.social-link:hover, button.copy-clipboard:hover, .circle:hover 
     box-shadow: 0 0 10px var(--casLight);
 }
 
+a.button:focus, a.social-link:focus, button.copy-clipboard:focus, .circle:focus {
+    border: 3px var(--casLight) solid;
+}
+
 a.button {
     padding: 0.5rem 1rem;
 }
