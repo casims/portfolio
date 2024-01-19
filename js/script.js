@@ -357,16 +357,23 @@ const port = {
             this.contentHTML = `
                 <nav id="site-navigation">
                     <div id="nav-button-container">
-                        <a id="back-button" href="">
+                        <a id="back-button" href="#projects" class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M0 3.795l2.995-2.98 11.132 11.185-11.132 11.186-2.995-2.981 8.167-8.205-8.167-8.205zm18.04 8.205l-8.167 8.205 2.995 2.98 11.132-11.185-11.132-11.186-2.995 2.98 8.167 8.206z"/>
                             </svg>
                         </a>
                     </div>
                 </nav>
-                <h2>404 Error</h2>
-                <p>Page not found.</p>`;
+                <section id="error">
+                    <div class="card header">
+                        <h2>404 Error</h2>
+                    </div>
+                    <div class="contact card">
+                        <p>Page not found.</p>
+                    </div>
+                </section>`;
             this.target.innerHTML = this.contentHTML;
+            this.imageLoadCheck();
         } else {
             this.contentHTML = `
                 <a class="screen-reader-text" href="#project-header-section">Skip to content</a>
@@ -617,6 +624,10 @@ const port = {
         // Makes it so "loading" modal waits until all images have loaded before dissapearing
         let images = document.querySelectorAll('img');
         let imageCount = images.length - 1;
+        if (imageCount === 0) {
+            port.modalHide(port.loading);
+            return;
+        };
         let finishedCount = 0;
         let loadObserver = function() {
             this.removeEventListener('load', loadObserver);
