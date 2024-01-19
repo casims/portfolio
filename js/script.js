@@ -357,7 +357,7 @@ const port = {
             this.contentHTML = `
                 <nav id="site-navigation">
                     <div id="nav-button-container">
-                        <a id="back-button" href="#projects" class="circle">
+                        <a id="back-button" href="#main" class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M0 3.795l2.995-2.98 11.132 11.185-11.132 11.186-2.995-2.981 8.167-8.205-8.167-8.205zm18.04 8.205l-8.167 8.205 2.995 2.98 11.132-11.185-11.132-11.186-2.995 2.98 8.167 8.206z"/>
                             </svg>
@@ -379,7 +379,7 @@ const port = {
                 <a class="screen-reader-text" href="#project-header-section">Skip to content</a>
                 <nav id="site-navigation">
                     <div id="nav-button-container">
-                        <a id="back-button" href="#projects" class="circle">
+                        <a id="back-button" href="#main" class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M0 3.795l2.995-2.98 11.132 11.185-11.132 11.186-2.995-2.981 8.167-8.205-8.167-8.205zm18.04 8.205l-8.167 8.205 2.995 2.98 11.132-11.185-11.132-11.186-2.995 2.98 8.167 8.206z"/>
                             </svg>
@@ -456,7 +456,6 @@ const port = {
                             <h4 tabindex="0">${feature.proj_feat_gen_heading}</h4>
                             <p>${feature.proj_feat_gen_text}</p>`;
                 if (feature.proj_feat_gen_code) {
-                    console.log(feature.proj_feat_gen_code);
                     this.contentHTML += `<pre><code class="language-${feature.proj_feat_gen_code_lang}"><script type="prism-html-markup">${feature.proj_feat_gen_code}</script></code></pre>`;
                 };        
                 if (feature.proj_feat_gen_image) {
