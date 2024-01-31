@@ -145,7 +145,7 @@ const port = {
         <div class="contact-container">
             <div class="email-container">
                 <a href="mailto:connor@casims.ca" class="button email">connor@casims.ca</a>
-                <button type="button" class="copy-clipboard">
+                <button type="button" class="copy-clipboard" id="copy-clipboard">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M18 6v-6h-18v18h6v6h18v-18h-6zm-16 10v-14h14v4h-10v10h-4z"/>
                     </svg>
@@ -267,6 +267,7 @@ const port = {
             </section>`;
         this.target.innerHTML = this.contentHTML;
         this.imageLoadCheck();
+        this.buttonListeners();
     },
     outputContentTools: function(usedTools) {
         // Outputs tool tags for both the landing section and projects
@@ -503,6 +504,7 @@ const port = {
             this.imageLoadCheck();
             this.accordListeners();
             this.modalListeners();
+            this.buttonListeners();
             Prism.highlightAll();
         };
     },
@@ -645,6 +647,12 @@ const port = {
         };
         images.forEach(image => {
             image.addEventListener('load', loadObserver.bind(image), true);
+        });
+    },
+    buttonListeners: function() {
+        document.getElementById('copy-clipboard').addEventListener('click', function() {
+            navigator.clipboard.writeText('connor@casims.ca');
+            window.alert('"connor@casims.ca" has been copied to your clipboard.');
         });
     },
     trapFocus: function(element) {
